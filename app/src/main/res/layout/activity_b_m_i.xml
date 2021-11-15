@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BMIActivity">
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:src="@drawable/ic_ok_01"
+        android:layout_above="@id/contentlayout"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/contentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@drawable/card_background"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/bmidisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:text="35"
+            android:textColor="@color/hitam"
+            android:layout_centerHorizontal="true"/>
+
+
+        <TextView
+            android:id="@+id/genderdisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:layout_below="@id/bmidisplay"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/bmicategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nilai BMI kamu "
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textColor="@color/hitam"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/genderdisplay"/>
+
+    </RelativeLayout>
+
+    <android.widget.Button
+        android:id="@+id/recalculateBMI"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/contentlayout"
+        android:layout_marginBottom="205px"
+        android:text="Hitung Ulang BMI"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@color/biru"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"></android.widget.Button>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

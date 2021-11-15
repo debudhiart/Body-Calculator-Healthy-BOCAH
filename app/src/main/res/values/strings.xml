@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Praktikum Progmob</string>
+    <string name="register">Register</string>
+    <string name="register_exp">Buat Akun Baru</string>
+    <string name="salam_sapa">Terima kasih sudah menggunakan aplikasi kami, jadi lebih sehat dan sukseskan program diet anda bersama kami</string>
+    <string name="txt_btn_halaman_profile">Lewati, menuju halaman profile</string>
+    <string name="txt_btn_daftar">Daftar</string>
+    <string name="txt_btn_halaman_dashboard">Halaman Dashboard</string>
+</resources>

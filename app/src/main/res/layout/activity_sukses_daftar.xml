@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuksesDaftar">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="89px"
+            android:layout_marginLeft="89px">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-130px"
+                app:srcCompat="@drawable/ic_completed_pana"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_id_pesanSapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-200px"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Hai Budhi"
+                android:textColor="@color/hitam"
+                android:textSize="62px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_id_salamSapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/salam_sapa"
+                android:textAlignment="center"
+                android:textColor="@color/hitam"
+                android:textSize="39px"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_halaman_dashboard"
+                android:padding="37px"
+                android:layout_marginTop="55dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/biru"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="35px"
+                android:layout_marginBottom="10dp"
+                android:text="@string/txt_btn_halaman_dashboard"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btn_halaman_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="35px"
+                android:textColor="@color/Abu_abu_gelap"
+                android:layout_marginBottom="10dp"
+                android:text="@string/txt_btn_halaman_profile"
+                android:textAllCaps="false"
+                android:stateListAnimator="@null"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
