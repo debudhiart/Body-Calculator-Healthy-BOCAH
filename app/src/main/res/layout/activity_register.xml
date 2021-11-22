@@ -75,8 +75,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:fontFamily="@font/poppins_regular"
                         android:text="Nama Depan"
+                        android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/Abu_abu_gelap"
                         android:textSize="35px" />
 

@@ -78,7 +78,7 @@ public class DailyBook extends AppCompatActivity {
             public void onClick(View v) {
                 mmale.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.male_female_focus));
                 mfemale.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.male_female_not_focus));
-                typeofuser = "Male";
+                typeofuser = "Laki-laki";
             }
         });
 
@@ -87,7 +87,7 @@ public class DailyBook extends AppCompatActivity {
             public void onClick(View v) {
                 mmale.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.male_female_not_focus));
                 mfemale.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.male_female_focus));
-                typeofuser = "Female";
+                typeofuser = "Perempuan";
             }
         });
 

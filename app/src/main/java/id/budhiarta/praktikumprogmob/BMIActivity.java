@@ -17,6 +17,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BMIActivity extends AppCompatActivity {
 
     android.widget.Button mrecalculatebmi;
+    android.widget.Button btn_save_BMI;
+    android.widget.Button btn_program_diet_BMI;
+    android.widget.Button btn_program_gain_BMI;
+    android.widget.Button btn_program_maintenance_BMI;
 
     TextView mbmidisplay, mbmicategory, mgender;
     Intent intent;
@@ -115,6 +119,8 @@ public class BMIActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
     }

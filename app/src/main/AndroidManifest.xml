@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PraktikumProgmob">
-        <activity android:name=".BMIActivity"></activity>
+        <activity android:name=".EditMakanan"></activity>
+        <activity android:name=".FormTambahMakanan" />
+        <activity android:name=".BMIActivity" />
         <activity android:name=".DetailMakanan" />
         <activity android:name=".TambahMakanan" />
         <activity android:name=".Profile" />

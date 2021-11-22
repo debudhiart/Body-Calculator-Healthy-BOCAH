@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_tampil_makanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/Abu_abu_light"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/Abu_abu_stroke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_id_nama_makanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="66px"
+                android:layout_marginTop="52px"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Cereal"
+                android:textColor="@color/hitam"
+                android:textSize="35px" />
+
+            <TextView
+                android:id="@+id/tv_id_kalori_makanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52px"
+                android:layout_marginRight="66px"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="right"
+                android:text="130"
+                android:textColor="@color/hitam"
+                android:textSize="35px" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_id_keterangan_makanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="66px"
+            android:layout_marginBottom="40px"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="right"
+            android:text="Energen, 1 sachets"
+            android:textColor="@color/Abu_abu_gelap"
+            android:textSize="35px" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/Abu_abu_stroke" />
+
+    </LinearLayout>
+
+</RelativeLayout>
