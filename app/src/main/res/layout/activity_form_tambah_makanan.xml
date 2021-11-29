@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="235px">
+            android:layout_marginTop="105px">
 
             <TextView
                 android:id="@+id/tv_id_sisaKalori"

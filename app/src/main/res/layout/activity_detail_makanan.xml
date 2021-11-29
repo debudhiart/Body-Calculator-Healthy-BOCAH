@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="235px">
+            android:layout_marginTop="105px">
 
             <TextView
-                android:id="@+id/tv_id_sisaKalori"
+                android:id="@+id/tv_id_view_nama_makanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Semua Makanan"
@@ -55,16 +55,16 @@
                     android:textSize="35px"/>
 
                 <TextView
-                    android:id="@+id/tv_id_jumlah_saji"
+                    android:id="@+id/tv_id_view_satuan_saji"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1 sachets"
-                    android:layout_weight="1"
-                    android:gravity="right"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="66px"
+                    android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
+                    android:gravity="right"
+                    android:text="1 sachets"
                     android:textColor="@color/hitam"
-                    android:textSize="35px"/>
+                    android:textSize="35px" />
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
                     android:textSize="35px"/>
 
                 <TextView
-                    android:id="@+id/tv_id_jumlah_kalori"
+                    android:id="@+id/tv_id_view_jumlah_kalori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="130"
@@ -137,7 +137,7 @@
                     android:textSize="35px"/>
 
                 <TextView
-                    android:id="@+id/tv_id_jumlah_protein"
+                    android:id="@+id/tv_id_view_jumlah_protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="130"
@@ -176,7 +176,7 @@
                     android:textSize="35px"/>
 
                 <TextView
-                    android:id="@+id/tv_id_jumlah_lemak"
+                    android:id="@+id/tv_id_view_jumlah_lemak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="130"

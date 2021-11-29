@@ -12,10 +12,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -31,6 +35,7 @@ import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 import static android.content.ContentValues.TAG;
+import static android.graphics.Color.parseColor;
 
 public class TambahMakanan extends AppCompatActivity {
 
@@ -41,11 +46,18 @@ public class TambahMakanan extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private AdapterMakanan adapterMakanan;
     ArrayList<Model_tb_makanan> daftarMakananAdapter = new ArrayList<>();
+    private Model_tb_makanan makananModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_makanan);
+
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Tambah Makanan");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setBackgroundDrawable(new Color(parseColor("#ffffff")));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -96,22 +108,15 @@ public class TambahMakanan extends AppCompatActivity {
 //        });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void mulaiAdapter(){
-//        mRecyclerview = findViewById(R.id.rv_taks_to_do);
-//        fab_tambah = findViewById(R.id.fab_tambah);
-//        myDB = new HalperDataBase(MainActivity.this);
-//        mList = new ArrayList<>();
-//        adapter = new AdapterToDo(myDB, MainActivity.this);
-//
-//        mRecyclerview.setHasFixedSize(true);
-//        mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerview.setAdapter(adapter);
-//
-//        mList = myDB.getAllTaks();
-//        Collections.reverse(mList);
-//        adapter.setTasks(mList);
-
-
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_tambah_makanan);
         mRecyclerView.setHasFixedSize(true);
@@ -150,9 +155,18 @@ public class TambahMakanan extends AppCompatActivity {
                     AlertDialog dialog =builder.create();
                     dialog.show();
                 }else {
+                    makananModel = new Model_tb_makanan(
+                            daftarMakananAdapter.get(position).getMakanan_id(),
+                            daftarMakananAdapter.get(position).getKalori(),
+                            daftarMakananAdapter.get(position).getLemak(),
+                            daftarMakananAdapter.get(position).getProtein(),
+                            daftarMakananAdapter.get(position).getNama_makanan(),
+                            daftarMakananAdapter.get(position).getSatuan()
+                    );
+
                     Intent editMakananIntent = new Intent(TambahMakanan.this, EditMakanan.class);
+                    editMakananIntent.putExtra("dataMakanan", (Parcelable) makananModel);
                     startActivity(editMakananIntent);
-//            adapterMakanan.editItem(position);
 
                 }
 
@@ -172,6 +186,8 @@ public class TambahMakanan extends AppCompatActivity {
         });
 
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+
 
 //            rincianPengeluaranAdapter.setOnItemClickListener(new RincianPengeluaranAdapter.OnItemClickListener() {
 //                @Override

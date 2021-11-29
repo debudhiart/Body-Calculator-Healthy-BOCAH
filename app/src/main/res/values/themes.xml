@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PraktikumProgmob" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.PraktikumProgmob" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/biru</item>
         <item name="colorPrimaryVariant">@color/biru</item>
@@ -13,6 +13,6 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-<!--        <item name="android:windowFullscreen">true</item>-->
     </style>
+
 </resources>

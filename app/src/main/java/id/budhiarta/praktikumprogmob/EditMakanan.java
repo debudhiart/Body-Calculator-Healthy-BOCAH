@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 
 public class EditMakanan extends AppCompatActivity {
 
@@ -38,5 +42,29 @@ public class EditMakanan extends AppCompatActivity {
                 return false;
             }
         });
+
+        Intent intent = getIntent();
+        Model_tb_makanan makananModel = intent.getParcelableExtra("dataMakanan");
+
+        int kalori = makananModel.getKalori();
+        int protein = makananModel.getProtein();
+        int lemak = makananModel.getLemak();
+        String satuan = makananModel.getSatuan();
+        String namaMakanan = makananModel.getNama_makanan();
+
+        EditText etNamaMakanan = findViewById(R.id.et_edit_nama_makanan);
+        etNamaMakanan.setText(namaMakanan);
+
+        EditText etSatuan = findViewById(R.id.et_edit_satuan);
+        etSatuan.setText(satuan);
+
+        EditText etKalori = findViewById(R.id.et_edit_kalori);
+        etKalori.setText(String.valueOf(kalori));
+
+        EditText etLemak = findViewById(R.id.et_edit_lemak);
+        etLemak.setText(String.valueOf(lemak));
+
+        EditText etProtein = findViewById(R.id.et_edit_protein);
+        etProtein.setText(String.valueOf(protein));
     }
 }

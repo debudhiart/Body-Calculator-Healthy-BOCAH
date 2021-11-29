@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 
 public class DetailMakanan extends AppCompatActivity {
 
@@ -15,6 +20,8 @@ public class DetailMakanan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_makanan);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -38,5 +45,47 @@ public class DetailMakanan extends AppCompatActivity {
                 return false;
             }
         });
+
+        Intent intent = getIntent();
+        Model_tb_makanan makananModel = intent.getParcelableExtra("detailMakanan");
+
+        int kalori = makananModel.getKalori();
+        int protein = makananModel.getProtein();
+        int lemak = makananModel.getLemak();
+        String satuan = makananModel.getSatuan();
+        String namaMakanan = makananModel.getNama_makanan();
+
+        TextView tvNamaMakanan = findViewById(R.id.tv_id_view_nama_makanan);
+        tvNamaMakanan.setText(namaMakanan);
+
+        TextView tvSatuan = findViewById(R.id.tv_id_view_satuan_saji);
+        tvSatuan.setText(satuan);
+
+        TextView tvKalori = findViewById(R.id.tv_id_view_jumlah_kalori);
+        tvKalori.setText(String.valueOf(kalori));
+
+        TextView tvLemak = findViewById(R.id.tv_id_view_jumlah_lemak);
+        tvLemak.setText(String.valueOf(lemak));
+
+        TextView tvProtein = findViewById(R.id.tv_id_view_jumlah_protein);
+        tvProtein.setText(String.valueOf(protein));
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        else if(item.getItemId()==R.id.btn_submit_makan){
+            Toast.makeText(this, "Selamat Makan", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail_makanan, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

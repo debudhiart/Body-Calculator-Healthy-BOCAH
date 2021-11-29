@@ -1,7 +1,9 @@
 package id.budhiarta.praktikumprogmob;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
     Context context;
     private DBHelper myDB;
     private TambahMakanan tambahMakanan;
+    private Model_tb_makanan makanan;
 
     public AdapterMakanan(Context context, ArrayList<Model_tb_makanan> datarMakananList, TambahMakanan tambahMakanan, DBHelper myDB) {
         this.tambahMakanan = tambahMakanan;
@@ -42,9 +45,27 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
 
     @Override
     public void onBindViewHolder(@NonNull AdapterMakananViewHolder holder, int position) {
+
         holder.view_nama_makanan.setText(mMakananList.get(position).getNama_makanan());
         holder.view_keterangan_makanan.setText(mMakananList.get(position).getSatuan());
         holder.view_kalori_makanan.setText(Integer.toString(mMakananList.get(position).getKalori()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makanan = new Model_tb_makanan(
+                        mMakananList.get(position).getMakanan_id(),
+                        mMakananList.get(position).getKalori(),
+                        mMakananList.get(position).getLemak(),
+                        mMakananList.get(position).getProtein(),
+                        mMakananList.get(position).getNama_makanan(),
+                        mMakananList.get(position).getSatuan()
+                );
+
+                Intent intentDetailMakanan = new Intent(holder.itemView.getContext(), DetailMakanan.class);
+                intentDetailMakanan.putExtra("detailMakanan", (Parcelable) makanan);
+                holder.itemView.getContext().startActivity(intentDetailMakanan);
+            }
+        });
     }
 
     @Override
@@ -56,6 +77,7 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
         TextView view_nama_makanan;
         TextView view_keterangan_makanan;
         TextView view_kalori_makanan;
+
 
         public AdapterMakananViewHolder(@NonNull View itemView) {
             super(itemView);

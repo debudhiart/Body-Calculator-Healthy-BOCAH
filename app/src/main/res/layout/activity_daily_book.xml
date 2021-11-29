@@ -7,16 +7,20 @@
     tools:context=".DailyBook">
 
     <RelativeLayout
+        android:id="@+id/centerhorizontaline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:id="@+id/centerhorizontaline"></RelativeLayout>
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="500dp"></RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:id="@+id/centerverticaline"></RelativeLayout>
+        android:id="@+id/centerverticaline"
+        android:layout_marginBottom="80dp"
+        ></RelativeLayout>
 
 
     <RelativeLayout
@@ -26,7 +30,7 @@
         android:layout_toStartOf="@id/centerverticaline"
         android:background="@drawable/male_female_not_focus"
         android:layout_above="@id/heightlayout"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
@@ -59,7 +63,7 @@
         android:layout_toEndOf="@id/centerverticaline"
         android:background="@drawable/male_female_not_focus"
         android:layout_above="@id/heightlayout"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
@@ -92,7 +96,7 @@
         android:layout_toStartOf="@id/centerverticaline"
         android:layout_below="@id/heightlayout"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/card_background"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
@@ -108,7 +112,7 @@
             android:textSize="18sp"
             android:fontFamily="@font/poppins_semi_bold"
             android:textColor="@color/hitam"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/currentweight"
@@ -165,7 +169,7 @@
         android:layout_toEndOf="@id/centerverticaline"
         android:layout_below="@id/heightlayout"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/card_background"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
@@ -235,11 +239,11 @@
         android:layout_width="340dp"
         android:layout_height="150dp"
         android:layout_above="@+id/centerhorizontaline"
-        android:layout_marginBottom="-50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-15dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:background="@drawable/card_background"
-        android:layout_centerHorizontal="true">
+        android:background="@drawable/card_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -301,13 +305,6 @@
         android:layout_marginRight="20dp"
         android:textStyle="bold"></android.widget.Button>
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    </ScrollView>
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
