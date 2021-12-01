@@ -3,6 +3,7 @@ package id.budhiarta.praktikumprogmob;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,16 +13,20 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 
 public class DetailMakanan extends AppCompatActivity {
-
+    private DBHelper dbHelper;
+    private Model_tb_makanan makananModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_makanan);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        dbHelper = new DBHelper(this);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -47,7 +52,7 @@ public class DetailMakanan extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        Model_tb_makanan makananModel = intent.getParcelableExtra("detailMakanan");
+        makananModel= intent.getParcelableExtra("detailMakanan");
 
         int kalori = makananModel.getKalori();
         int protein = makananModel.getProtein();
@@ -78,7 +83,17 @@ public class DetailMakanan extends AppCompatActivity {
             finish();
         }
         else if(item.getItemId()==R.id.btn_submit_makan){
-            Toast.makeText(this, "Selamat Makan", Toast.LENGTH_SHORT).show();
+            int id_shift=getIntent().getIntExtra("shift_makan_id",0);
+            ContentValues values = new ContentValues();
+            values.put(DBHelper.makanan_id, makananModel.getMakanan_id());
+            values.put(DBHelper.SHIFT_MAKAN_ID,id_shift);
+////            if(id_shift==2131296360){
+////                values.put(DBHelper.SHIFT_MAKAN_ID,1);
+////            }
+            dbHelper.insertMakananToDetailShift(values);
+            Intent intent= new Intent(getApplicationContext(),Dashboard.class);
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
