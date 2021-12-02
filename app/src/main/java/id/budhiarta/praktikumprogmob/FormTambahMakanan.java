@@ -132,6 +132,7 @@ public class FormTambahMakanan extends AppCompatActivity {
 //                        suksesDaftar.putExtra(KIRIM_NAMA_DEPAN, textNamaDepan);
 
                         startActivity(intent);
+                        finish();
                     }
                 });
             }

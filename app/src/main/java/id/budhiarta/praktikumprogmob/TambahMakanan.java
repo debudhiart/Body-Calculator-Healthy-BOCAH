@@ -47,7 +47,7 @@ public class TambahMakanan extends AppCompatActivity {
     private AdapterMakanan adapterMakanan;
     ArrayList<Model_tb_makanan> daftarMakananAdapter = new ArrayList<>();
     private Model_tb_makanan makananModel;
-
+    public static int idShift;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +87,8 @@ public class TambahMakanan extends AppCompatActivity {
 
         db = new DBHelper(this);
         daftarMakananAdapter = db.getAllData_tb_makanan();
+        idShift=getIntent().getIntExtra("shift_makan_id",0);
+        Toast.makeText(this, "ID SHift : "+Integer.toString(idShift), Toast.LENGTH_SHORT).show();
         mulaiAdapter();
 
         FloatingActionButton fabTambahDataMakanan = findViewById(R.id.fab_tambah_data_makanan);
@@ -121,7 +123,7 @@ public class TambahMakanan extends AppCompatActivity {
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_tambah_makanan);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        adapterMakanan = new AdapterMakanan(this, daftarMakananAdapter, this, db);
+        adapterMakanan = new AdapterMakanan(this, daftarMakananAdapter, db,idShift);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapterMakanan);
@@ -143,6 +145,8 @@ public class TambahMakanan extends AppCompatActivity {
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Model_tb_makanan item = adapterMakanan.getMakananList().get(position);
+                            db.deleteData_tb_makanan(item.getMakanan_id());
                             adapterMakanan.deleteMakanan(position);
                         }
                     });

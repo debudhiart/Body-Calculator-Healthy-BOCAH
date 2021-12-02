@@ -181,51 +181,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="2">-->
 
-                <TextView
-                    android:id="@+id/tv_id_nama_sarapan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cereal"
-                    android:layout_weight="1"
-                    android:layout_marginTop="52px"
-                    android:layout_marginLeft="66px"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/hitam"
-                    android:textSize="35px"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_nama_sarapan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Cereal"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_marginTop="52px"-->
+<!--                    android:layout_marginLeft="66px"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:textColor="@color/hitam"-->
+<!--                    android:textSize="35px"/>-->
 
-                <TextView
-                    android:id="@+id/tv_id_kalori_sarapan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="130"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_marginTop="52px"
-                    android:layout_marginRight="66px"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/hitam"
-                    android:textSize="35px"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_kalori_sarapan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="130"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="right"-->
+<!--                    android:layout_marginTop="52px"-->
+<!--                    android:layout_marginRight="66px"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:textColor="@color/hitam"-->
+<!--                    android:textSize="35px"/>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <TextView
-                android:id="@+id/tv_id_keterangan_sarapan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Energen, 1 sachets"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginLeft="66px"
-                android:layout_marginBottom="40px"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/Abu_abu_gelap"
-                android:textSize="35px"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tv_id_keterangan_sarapan"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Energen, 1 sachets"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="right"-->
+<!--                android:layout_marginLeft="66px"-->
+<!--                android:layout_marginBottom="40px"-->
+<!--                android:fontFamily="@font/poppins_regular"-->
+<!--                android:textColor="@color/Abu_abu_gelap"-->
+<!--                android:textSize="35px"/>-->
 
             <View
                 android:layout_width="wrap_content"
@@ -372,51 +372,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="2">-->
 
-                <TextView
-                    android:id="@+id/tv_id_nama_makan_malam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cereal"
-                    android:layout_weight="1"
-                    android:layout_marginTop="52px"
-                    android:layout_marginLeft="66px"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/hitam"
-                    android:textSize="35px"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_nama_makan_malam"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Cereal"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_marginTop="52px"-->
+<!--                    android:layout_marginLeft="66px"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:textColor="@color/hitam"-->
+<!--                    android:textSize="35px"/>-->
 
-                <TextView
-                    android:id="@+id/tv_id_kalori_makan_malam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="130"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_marginTop="52px"
-                    android:layout_marginRight="66px"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/hitam"
-                    android:textSize="35px"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_id_kalori_makan_malam"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="130"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="right"-->
+<!--                    android:layout_marginTop="52px"-->
+<!--                    android:layout_marginRight="66px"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:textColor="@color/hitam"-->
+<!--                    android:textSize="35px"/>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <TextView
-                android:id="@+id/tv_id_keterangan_makan_malam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Energen, 1 sachets"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginLeft="66px"
-                android:layout_marginBottom="40px"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/Abu_abu_gelap"
-                android:textSize="35px"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tv_id_keterangan_makan_malam"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Energen, 1 sachets"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="right"-->
+<!--                android:layout_marginLeft="66px"-->
+<!--                android:layout_marginBottom="40px"-->
+<!--                android:fontFamily="@font/poppins_regular"-->
+<!--                android:textColor="@color/Abu_abu_gelap"-->
+<!--                android:textSize="35px"/>-->
 
             <View
                 android:layout_width="wrap_content"

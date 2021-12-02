@@ -1,5 +1,6 @@
 package id.budhiarta.praktikumprogmob;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +24,13 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
     private DBHelper myDB;
     private TambahMakanan tambahMakanan;
     private Model_tb_makanan makanan;
-
-    public AdapterMakanan(Context context, ArrayList<Model_tb_makanan> datarMakananList, TambahMakanan tambahMakanan, DBHelper myDB) {
-        this.tambahMakanan = tambahMakanan;
+    private int id_shift;
+    public AdapterMakanan(Context context, ArrayList<Model_tb_makanan> datarMakananList, DBHelper myDB,int id_shift) {
+//        this.tambahMakanan = tambahMakanan;
         this.context = context;
         this.mMakananList= datarMakananList;
         this.myDB = myDB;
+        this.id_shift=id_shift;
     }
 
 //    public AdapterMakanan(HalperDataBase myDB, MainActivity activity){
@@ -52,18 +54,20 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makanan = new Model_tb_makanan(
-                        mMakananList.get(position).getMakanan_id(),
-                        mMakananList.get(position).getKalori(),
-                        mMakananList.get(position).getLemak(),
-                        mMakananList.get(position).getProtein(),
-                        mMakananList.get(position).getNama_makanan(),
-                        mMakananList.get(position).getSatuan()
-                );
-
-                Intent intentDetailMakanan = new Intent(holder.itemView.getContext(), DetailMakanan.class);
-                intentDetailMakanan.putExtra("detailMakanan", (Parcelable) makanan);
-                holder.itemView.getContext().startActivity(intentDetailMakanan);
+                if(id_shift!=0){
+                    makanan = new Model_tb_makanan(
+                            mMakananList.get(position).getMakanan_id(),
+                            mMakananList.get(position).getKalori(),
+                            mMakananList.get(position).getLemak(),
+                            mMakananList.get(position).getProtein(),
+                            mMakananList.get(position).getNama_makanan(),
+                            mMakananList.get(position).getSatuan()
+                    );
+                    Intent intentDetailMakanan = new Intent(holder.itemView.getContext(), DetailMakanan.class);
+                    intentDetailMakanan.putExtra("detailMakanan", (Parcelable) makanan);
+                    intentDetailMakanan.putExtra("shift_makan_id", id_shift);
+                    holder.itemView.getContext().startActivity(intentDetailMakanan);
+                }
             }
         });
     }
@@ -89,17 +93,18 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
     }
 
     public Context getContext(){
-        return tambahMakanan;
+        return context;
     }
 
     public void deleteMakanan(int position){
-        Model_tb_makanan item = mMakananList.get(position);
-        myDB.deleteData_tb_makanan(item.getMakanan_id());
         mMakananList.remove(position);
         notifyItemRemoved(position);
 
     }
 
+    public ArrayList<Model_tb_makanan> getMakananList(){
+        return mMakananList;
+    }
 //    public void editItem(int position){
 //        Model_tb_makanan item = mMakananList.get(position);
 //        Bundle bundle = new Bundle();
