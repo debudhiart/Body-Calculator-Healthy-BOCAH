@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DataProgramActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="205px">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="105px">
+
+                <TextView
+                    android:id="@+id/tv_id_data_program"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Program"
+                    android:layout_marginLeft="66px"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="26px"
+                    android:textColor="@color/hitam"
+                    android:textSize="72px"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/Abu_abu_stroke" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp"
+                    android:background="@color/Abu_abu" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="52px"
+                    android:layout_marginBottom="52px"
+                    android:weightSum="2">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-20dp"
+                        android:layout_marginRight="16dp"
+                        android:orientation="vertical"
+                        android:paddingTop="22dp"
+                        android:paddingBottom="22dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_id_program_jenis_kelamin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jenis Kelamin"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <RadioGroup
+                                android:id="@+id/rg_program_gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <RadioButton
+                                    android:id="@+id/rb_program_laki_laki"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:text="Laki-laki" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_program_perempuan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="5"
+                                    android:text="Perempuan" />
+
+                            </RadioGroup>
+
+                            <TextView
+                                android:id="@+id/tv_id_program_tinggi_badan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tinggi Badan (m)"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <EditText
+                                android:id="@+id/et_program_tinggi_badan"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginBottom="20dp"
+                                android:ems="10"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:hint="exp: 183"
+                                android:inputType="textEmailAddress"
+                                android:textColor="@color/hitam"
+                                android:textSize="42px" />
+
+                            <TextView
+                                android:id="@+id/tv_id_program_berat_badan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Berat Badan (kg)"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <EditText
+                                android:id="@+id/et_program_berat_badan"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:ems="10"
+                                android:hint="exp: 68"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:inputType="number"
+                                android:textColor="@color/hitam"
+                                android:textSize="42px"
+                                android:layout_marginBottom="20dp"/>
+
+                            <TextView
+                                android:id="@+id/tv_id_program_umur"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Umur"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <EditText
+                                android:id="@+id/et_program_umur"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:ems="10"
+                                android:hint="exp: 20"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:inputType="number"
+                                android:textColor="@color/hitam"
+                                android:textSize="42px"
+                                android:layout_marginBottom="20dp"/>
+
+                            <TextView
+                                android:id="@+id/tv_id_program_aktifitas_tubuh"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Aktifitas Tubuh (Mingguan)"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <Spinner
+                                android:id="@+id/sp_program_aktifitas_tubuh"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/hitam"
+                                android:textSize="42px"
+                                android:layout_marginBottom="20dp"
+                                android:entries="@array/aktifitas_mingguan"
+                                android:nextFocusDown="@+id/sp_input_program"/>
+
+                            <TextView
+                                android:id="@+id/tv_id_program_program"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Program"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/Abu_abu_gelap"
+                                android:textSize="35px"  />
+
+                            <Spinner
+                                android:id="@+id/sp_program_program"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/hitam"
+                                android:textSize="42px"
+                                android:layout_marginBottom="20dp"
+                                android:entries="@array/daftar_program"
+                                android:nextFocusDown="@+id/inputHobi1"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginBottom="50dp"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/btn_simpan_program"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="59dp"
+                                    android:layout_weight="1"
+                                    android:backgroundTint="@color/biru"
+                                    android:text="Simpan Program"
+                                    android:textAllCaps="false"
+                                    android:fontFamily="@font/poppins_semi_bold"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

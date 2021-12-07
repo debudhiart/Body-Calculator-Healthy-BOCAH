@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,6 +36,8 @@ public class Dashboard extends AppCompatActivity {
     private Model_tb_makanan makananModel;
     private Model_tb_shift_makan shiftSarapan,shiftSiang,shiftMalam;
     private DBHelper db;
+    private TextView tv_kalori_sarapan,tv_kalori_mkn_siang,tv_kalori_mkn_malam,tv_total_kalori,tv_target_kalori;
+    private RecyclerView sarapanRecyclerView,mknSiangRecyclerView,mknMalamRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,14 @@ public class Dashboard extends AppCompatActivity {
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle("Dashboard");
+        sarapanRecyclerView = (RecyclerView) findViewById(R.id.rv_sarapan);
+        mknSiangRecyclerView = (RecyclerView) findViewById(R.id.rv_makan_siang);
+        mknMalamRecyclerView = (RecyclerView) findViewById(R.id.rv_makan_malam);
+        tv_kalori_sarapan=findViewById(R.id.tv_id_jumlah_sarapan);
+        tv_kalori_mkn_siang=findViewById(R.id.tv_id_jumlah_makan_siang);
+        tv_kalori_mkn_malam=findViewById(R.id.tv_id_jumlah_makan_malam);
+        tv_total_kalori=findViewById(R.id.tv_totalKalori);
+        tv_target_kalori=findViewById(R.id.tv_targetKalori);
 
         db=new DBHelper(this);
         shiftSarapan=db.getShiftMakan(1,1);
@@ -54,7 +65,6 @@ public class Dashboard extends AppCompatActivity {
         mulaiAdapter();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setSelectedItemId(R.id.btn_dashboard);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -106,10 +116,11 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void mulaiAdapter() {
+        tv_kalori_sarapan.setText(Integer.toString(shiftSarapan.getTotal_kalori()));
+        tv_kalori_mkn_siang.setText(Integer.toString(shiftSiang.getTotal_kalori()));
+        tv_kalori_mkn_malam.setText(Integer.toString(shiftMalam.getTotal_kalori()));
+        tv_total_kalori.setText(Integer.toString(shiftSarapan.getTotal_kalori()+shiftSiang.getTotal_kalori()+shiftMalam.getTotal_kalori()));
 
-        RecyclerView sarapanRecyclerView = (RecyclerView) findViewById(R.id.rv_sarapan);
-        RecyclerView mknSiangRecyclerView = (RecyclerView) findViewById(R.id.rv_makan_siang);
-        RecyclerView mknMalamRecyclerView = (RecyclerView) findViewById(R.id.rv_makan_malam);
         sarapanRecyclerView.setHasFixedSize(false);
         mknSiangRecyclerView.setHasFixedSize(false);
         mknMalamRecyclerView.setHasFixedSize(false);

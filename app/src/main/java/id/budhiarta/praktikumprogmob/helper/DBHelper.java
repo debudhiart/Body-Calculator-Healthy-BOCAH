@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Display;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -35,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String makanan_id = "makanan_id";
     public static final String nama_makanan = "nama_makanan";
     public static final String satuan = "satuan";
-    public static final String kalori = "nama_belakang";
+    public static final String kalori = "kalori";
     public static final String protein = "protein";
     public static final String lemak = "lemak";
 
@@ -47,12 +48,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TB_DETAIL_SHIFT="tb_detail_shift";
     public static final String DETAIL_SHIFT_ID = "detail_shift_id";
 
+    private Context context;
 
     private SQLiteDatabase db;
 
     public DBHelper(@Nullable Context context) {
         super(context, db_praktikum_progmob, null, 2);
         db = getWritableDatabase();
+        this.context=context;
     }
 
     @Override
@@ -133,8 +136,12 @@ public class DBHelper extends SQLiteOpenHelper {
 //
 //
 //    }
-    public void insertMakananToDetailShift(ContentValues contentValues){
-        db.insert(TB_DETAIL_SHIFT, null, contentValues);
+    public void insertMakananToDetailShift(int shift_makan_id,Model_tb_makanan food){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.makanan_id, food.getMakanan_id());
+        values.put(DBHelper.SHIFT_MAKAN_ID,shift_makan_id);
+        db.insert(TB_DETAIL_SHIFT, null, values);
+        updateShiftMakan(shift_makan_id,1,food.getKalori());
     }
 
     public Model_tb_shift_makan getShiftMakan(int shift_makan_id, int user_id){
@@ -199,5 +206,40 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void deleteDataMakananInShiftMakanan(int makanan_id,int shift_makan_id){
         db.delete(TB_DETAIL_SHIFT,this.DETAIL_SHIFT_ID+" IN " +"(SELECT "+DETAIL_SHIFT_ID+" FROM "+TB_DETAIL_SHIFT+" WHERE "+this.makanan_id + "=" + makanan_id+" AND "+SHIFT_MAKAN_ID+"="+shift_makan_id+" LIMIT 1)", null );
+    }
+
+    public void updateShiftMakan(int shift_makan_id,int opsi, int kalori){
+        ContentValues values=new ContentValues();
+        Cursor cursor=db.rawQuery("SELECT "+TOTAL_KALORI+" FROM "+TB_SHIFT_MAKAN+" WHERE "+SHIFT_MAKAN_ID+"="+Integer.toString(shift_makan_id),null);
+        cursor.moveToFirst();
+        int total_kalori=cursor.getInt(0);
+        if(opsi==1){
+                values.put(TOTAL_KALORI,total_kalori+kalori);
+                int hasil=db.update(TB_SHIFT_MAKAN,values,SHIFT_MAKAN_ID+"=?",new String[]{Integer.toString(shift_makan_id)});
+                Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
+        }else{
+            values.put(TOTAL_KALORI,total_kalori-kalori);
+            int hasil=db.update(TB_SHIFT_MAKAN,values,SHIFT_MAKAN_ID+"=?",new String[]{Integer.toString(shift_makan_id)});
+            Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void insertAllData(ArrayList<Model_tb_makanan> makanan){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            for (Model_tb_makanan makan : makanan) {
+                values.put(nama_makanan, makan.getNama_makanan());
+                values.put(satuan, makan.getSatuan());
+                values.put(kalori, makan.getKalori());
+                values.put(protein, makan.getProtein());
+                values.put(lemak, makan.getLemak());
+                db.insert(tb_makanan, null, values);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
     }
 }

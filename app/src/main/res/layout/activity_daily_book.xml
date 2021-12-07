@@ -265,7 +265,7 @@
             android:textColor="@color/biru"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_semi_bold"/>
-\
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -303,6 +303,7 @@
         android:background="@color/biru"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:fontFamily="@font/poppins_semi_bold"
         android:textStyle="bold"></android.widget.Button>
 
 <!--    <TextView-->

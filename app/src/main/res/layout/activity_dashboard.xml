@@ -38,16 +38,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center">
+
                     <TextView
+                        android:id="@+id/tv_targetKalori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2.810"
-                        android:textStyle="bold"
-                        android:textColor="@color/hitam"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="62px"/>
+                        android:text="2.810"
+                        android:textColor="@color/hitam"
+                        android:textSize="62px"
+                        android:textStyle="bold" />
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Sasaran"
@@ -71,23 +73,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/tv_totalKalori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="130"
-                        android:textStyle="bold"
-                        android:textColor="@color/hitam"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="62px"/>
+                        android:text="130"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/hitam"
+                        android:textSize="62px"
+                        android:textStyle="bold" />
                     <TextView
-                        android:id="@+id/tv_id_namaDepan"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Makanan"
                         android:textAlignment="center"
                         android:textColor="@color/hitam"
-                        android:textSize="29px" />
+                        android:textSize="29px"
+                        />
                 </LinearLayout>
 
                 <TextView
@@ -117,7 +122,7 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tv_id_sisa"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Sisa"

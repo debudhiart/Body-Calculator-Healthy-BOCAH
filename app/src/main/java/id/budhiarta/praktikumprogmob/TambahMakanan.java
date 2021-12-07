@@ -33,6 +33,11 @@ import java.util.Collections;
 import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
 import static android.graphics.Color.parseColor;
@@ -48,6 +53,11 @@ public class TambahMakanan extends AppCompatActivity {
     ArrayList<Model_tb_makanan> daftarMakananAdapter = new ArrayList<>();
     private Model_tb_makanan makananModel;
     public static int idShift;
+    private MakananAPI makananAPI;
+    private  Call<ArrayList<Model_tb_makanan>> call;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +67,11 @@ public class TambahMakanan extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle("Tambah Makanan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.2:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        makananAPI = retrofit.create(MakananAPI.class);
+        call = makananAPI.getFood();
+
 //        getSupportActionBar().setBackgroundDrawable(new Color(parseColor("#ffffff")));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -108,6 +123,8 @@ public class TambahMakanan extends AppCompatActivity {
 //                startActivity(viewDetailMakanan);
 //            }
 //        });
+
+
     }
 
     @Override
@@ -123,10 +140,37 @@ public class TambahMakanan extends AppCompatActivity {
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_tambah_makanan);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        adapterMakanan = new AdapterMakanan(this, daftarMakananAdapter, db,idShift);
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapterMakanan);
+
+
+        ArrayList <Model_tb_makanan> makananArrayList = db.getAllData_tb_makanan();
+        if (makananArrayList.isEmpty()){
+            call.enqueue(new Callback<ArrayList<Model_tb_makanan>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Model_tb_makanan>> call, Response<ArrayList<Model_tb_makanan>> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(getApplicationContext(), "Code : " + Integer.toString(response.code()), Toast.LENGTH_LONG).show();
+                        return;
+                    }else {
+                        daftarMakananAdapter = response.body();
+                        db.insertAllData(daftarMakananAdapter);
+                        Toast.makeText(getApplicationContext(), "Code : " + daftarMakananAdapter.get(0).getNama_makanan(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Model_tb_makanan>> call, Throwable t) {
+                    Log.d("api",t.getMessage());
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+//                daftarMakananAdapter=db.getAllData_tb_makanan();
+                }
+            });
+        }else {
+            adapterMakanan = new AdapterMakanan(getApplicationContext(), makananArrayList, db,idShift);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setAdapter(adapterMakanan);
+
+        }
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -169,6 +213,7 @@ public class TambahMakanan extends AppCompatActivity {
                     );
 
                     Intent editMakananIntent = new Intent(TambahMakanan.this, EditMakanan.class);
+//                    editMakananIntent.putExtra("idMakanan", daftarMakananAdapter.get(position).getMakanan_id());
                     editMakananIntent.putExtra("dataMakanan", (Parcelable) makananModel);
                     startActivity(editMakananIntent);
 
@@ -218,7 +263,7 @@ public class TambahMakanan extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         daftarMakananAdapter = db.getAllData_tb_makanan();
-        adapterMakanan.notifyDataSetChanged();
+//        adapterMakanan.notifyDataSetChanged();
     }
 
 

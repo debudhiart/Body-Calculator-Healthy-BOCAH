@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,15 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 import id.budhiarta.praktikumprogmob.helper.DBHelper;
+import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FormTambahMakanan extends AppCompatActivity {
 
@@ -29,6 +38,9 @@ public class FormTambahMakanan extends AppCompatActivity {
 
     ImageButton imgBtnBack;
 
+    private MakananAPI makananAPI;
+    private Call<Model_tb_makanan> call;
+
     private DBHelper dbHelper;
 
     @Override
@@ -37,6 +49,11 @@ public class FormTambahMakanan extends AppCompatActivity {
         setContentView(R.layout.activity_form_tambah_makanan);
 
         dbHelper = new DBHelper(this);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Input Makanan");
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -122,21 +139,50 @@ public class FormTambahMakanan extends AppCompatActivity {
                         ContentValues values = new ContentValues();
                         values.put(DBHelper.nama_makanan, textNamaMakanan);
                         values.put(DBHelper.satuan, textSatuan);
-                        values.put(DBHelper.kalori, angkaKalori);
-                        values.put(DBHelper.protein, angkaProtein);
-                        values.put(DBHelper.lemak, angkaLemak);
+                        values.put(DBHelper.kalori, Integer.parseInt(angkaKalori));
+                        values.put(DBHelper.protein, Integer.parseInt(angkaProtein));
+                        values.put(DBHelper.lemak, Integer.parseInt(angkaLemak));
                         dbHelper.insertData_tb_makanan(values);
+
+                        insertAPIMakanan(textNamaMakanan, textSatuan, angkaKalori, angkaProtein, angkaLemak);
+
+//                        call = makananAPI.insertMakananAPI(textNamaMakanan, textSatuan, Integer.parseInt(angkaKalori), Integer.parseInt(angkaProtein), Integer.parseInt(angkaLemak));
+
                         Toast.makeText(FormTambahMakanan.this, "Data berhasil disimpan " + textNamaMakanan, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(FormTambahMakanan.this, TambahMakanan.class);
+                        Intent intent = new Intent(FormTambahMakanan.this, Dashboard.class);
 //                        suksesDaftar.putExtra(KIRIM_NAMA_DEPAN, textNamaDepan);
 
                         startActivity(intent);
-                        finish();
                     }
                 });
             }
         });
 
+    }
+
+    private void insertAPIMakanan(String textNamaMakanan, String textSatuan, String angkaKalori, String angkaProtein, String angkaLemak) {
+
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.2:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        makananAPI = retrofit.create(MakananAPI.class);
+        makananAPI.insertMakananAPI(textNamaMakanan, textSatuan, Integer.parseInt(angkaKalori), Integer.parseInt(angkaProtein), Integer.parseInt(angkaLemak)).enqueue(new Callback<Model_tb_makanan>() {
+            @Override
+            public void onResponse(Call<Model_tb_makanan> call, Response<Model_tb_makanan> response) {
+                Toast.makeText(getApplicationContext(), "Berhasil Tambah Makanan API", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Model_tb_makanan> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Bangsat", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

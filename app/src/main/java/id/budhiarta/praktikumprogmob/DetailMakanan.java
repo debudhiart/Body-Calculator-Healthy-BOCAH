@@ -25,6 +25,9 @@ public class DetailMakanan extends AppCompatActivity {
         setContentView(R.layout.activity_detail_makanan);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Detail Makanan");
 
         dbHelper = new DBHelper(this);
 
@@ -75,6 +78,8 @@ public class DetailMakanan extends AppCompatActivity {
         TextView tvProtein = findViewById(R.id.tv_id_view_jumlah_protein);
         tvProtein.setText(String.valueOf(protein));
 
+
+
     }
 
     @Override
@@ -84,13 +89,10 @@ public class DetailMakanan extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.btn_submit_makan){
             int id_shift=getIntent().getIntExtra("shift_makan_id",0);
-            ContentValues values = new ContentValues();
-            values.put(DBHelper.makanan_id, makananModel.getMakanan_id());
-            values.put(DBHelper.SHIFT_MAKAN_ID,id_shift);
 ////            if(id_shift==2131296360){
 ////                values.put(DBHelper.SHIFT_MAKAN_ID,1);
 ////            }
-            dbHelper.insertMakananToDetailShift(values);
+            dbHelper.insertMakananToDetailShift(id_shift,makananModel);
             Intent intent= new Intent(getApplicationContext(),Dashboard.class);
             startActivity(intent);
             finish();

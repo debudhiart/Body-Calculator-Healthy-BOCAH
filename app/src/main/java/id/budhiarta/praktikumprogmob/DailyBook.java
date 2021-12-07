@@ -38,6 +38,9 @@ public class DailyBook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_book);
 
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Kalkulator BMI");
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setSelectedItemId(R.id.btn_dailybook);
@@ -169,7 +172,6 @@ public class DailyBook extends AppCompatActivity {
                     intent.putExtra("age", age2);
 
                     startActivity(intent);
-                    finish();
                 }
             }
         });

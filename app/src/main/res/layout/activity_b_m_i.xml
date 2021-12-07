@@ -6,140 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".BMIActivity">
 
-
-
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="140dp"
-        android:layout_marginTop="105px"
-        android:padding="10dp"
-        android:src="@drawable/ic_ok_01"
-        android:layout_marginBottom="30dp"
-        android:layout_centerHorizontal="true"/>
-
-    <RelativeLayout
-        android:id="@+id/contentlayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@drawable/card_background"
-        android:layout_below="@+id/imageview">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/bmidisplay"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:text="35"
-            android:textColor="@color/hitam"
-            android:layout_centerHorizontal="true"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/genderdisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender"
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:layout_below="@id/bmidisplay"
-            android:layout_centerHorizontal="true"/>
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="257dp"
+                android:layout_height="321dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:src="@drawable/ic_gambar_orang_fit" />
 
-        <TextView
-            android:id="@+id/bmicategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nilai BMI kamu "
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/hitam"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/genderdisplay"/>
+            <TextView
+                android:id="@+id/bmicategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nilai BMI kamu "
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/biru"
+                android:layout_centerHorizontal="true"/>
 
-    </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_btn_save_recalculate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/contentlayout"
-        android:layout_marginBottom="45px"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+            <TextView
+                android:id="@+id/bmidisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:text="35"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/biru"
+                android:layout_centerHorizontal="true"/>
 
-        <android.widget.Button
-            android:id="@+id/recalculateBMI"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:text="Hitung Ulang BMI"
-            android:textSize="15dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:background="@color/biru"
-            android:textStyle="bold"></android.widget.Button>
+            <android.widget.Button
+                android:id="@+id/recalculateBMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hitung Ulang BMI"
+                android:textSize="15dp"
+                android:layout_marginRight="66px"
+                android:layout_marginLeft="66px"
+                android:layout_marginBottom="45px"
+                android:layout_marginTop="45px"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@color/biru"
+                android:textStyle="bold" />
 
-        <android.widget.Button
-            android:id="@+id/btn_save_BMI"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:text="Save BMI"
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:background="@color/hijau"
-            android:textStyle="bold"></android.widget.Button>
-    </LinearLayout>
+            <android.widget.Button
+                android:id="@+id/btn_atur_program"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atur Program"
+                android:textSize="15dp"
+                android:layout_marginRight="66px"
+                android:layout_marginLeft="66px"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@color/hijau"
+                android:textStyle="bold" />
 
-    <android.widget.Button
-        android:id="@+id/btn_program_diet_BMI"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/ll_btn_save_recalculate"
-        android:layout_marginBottom="45px"
-        android:text="Program Diet BMI"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:background="@color/merah"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textStyle="bold"></android.widget.Button>
+        </LinearLayout>
 
-    <android.widget.Button
-        android:id="@+id/btn_program_gain_BMI"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/btn_program_diet_BMI"
-        android:layout_marginBottom="45px"
-        android:text="Program Gain BMI"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:background="@color/biru"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textStyle="bold"></android.widget.Button>
-
-    <android.widget.Button
-        android:id="@+id/btn_program_maintenance_BMI"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/btn_program_gain_BMI"
-        android:layout_marginBottom="45px"
-        android:text="Program Maintenance BMI"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:background="@color/kuning"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textStyle="bold"></android.widget.Button>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

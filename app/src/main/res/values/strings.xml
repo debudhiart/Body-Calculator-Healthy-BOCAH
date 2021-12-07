@@ -7,4 +7,17 @@
     <string name="txt_btn_halaman_profile">Lewati, menuju halaman profile</string>
     <string name="txt_btn_daftar">Daftar</string>
     <string name="txt_btn_halaman_dashboard">Halaman Dashboard</string>
+
+    <string-array name="aktifitas_mingguan">
+        <item>Tidak Aktif (Tidak Olahraga)</item>
+        <item>Agak Aktif (1-2 X Olahraga)</item>
+        <item>Sering Aktif (3-4 X Olahraga)</item>
+        <item>Sangat Aktif (5-7 X Olahraga)</item>
+    </string-array>
+
+    <string-array name="daftar_program">
+        <item>Diet</item>
+        <item>Maintenance</item>
+        <item>Gain</item>
+    </string-array>
 </resources>
