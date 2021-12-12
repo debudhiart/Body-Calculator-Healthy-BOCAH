@@ -2,7 +2,6 @@ package id.budhiarta.praktikumprogmob;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 
 import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
+import id.budhiarta.praktikumprogmob.model.Model_tb_program;
 import id.budhiarta.praktikumprogmob.model.Model_tb_shift_makan;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -35,13 +35,17 @@ public class Dashboard extends AppCompatActivity {
     ArrayList<Model_tb_makanan> daftarMakananSarapan,daftarMakananSiang,daftarMakananMalam = new ArrayList<>();
     private Model_tb_makanan makananModel;
     private Model_tb_shift_makan shiftSarapan,shiftSiang,shiftMalam;
+    private Model_tb_program programModel;
     private DBHelper db;
-    private TextView tv_kalori_sarapan,tv_kalori_mkn_siang,tv_kalori_mkn_malam,tv_total_kalori,tv_target_kalori;
+    private TextView tv_kalori_sarapan,tv_kalori_mkn_siang,tv_kalori_mkn_malam,tv_total_kalori,tv_target_kalori,tv_sisa_kalori;
     private RecyclerView sarapanRecyclerView,mknSiangRecyclerView,mknMalamRecyclerView;
+    private int total_kalori,target_kalori;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        int userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -53,15 +57,20 @@ public class Dashboard extends AppCompatActivity {
         tv_kalori_mkn_siang=findViewById(R.id.tv_id_jumlah_makan_siang);
         tv_kalori_mkn_malam=findViewById(R.id.tv_id_jumlah_makan_malam);
         tv_total_kalori=findViewById(R.id.tv_totalKalori);
-        tv_target_kalori=findViewById(R.id.tv_targetKalori);
+        tv_target_kalori=findViewById(R.id.tv_target_kalori);
+        tv_sisa_kalori=findViewById(R.id.tv_sisa_kalori);
 
         db=new DBHelper(this);
-        shiftSarapan=db.getShiftMakan(1,1);
-        shiftSiang=db.getShiftMakan(2,1);
-        shiftMalam=db.getShiftMakan(3,1);
+        db.checkAndCreateShift(userID);
+        programModel=db.getProgram(userID);
+        shiftSarapan=db.getShiftMakan(1,userID);
+        shiftSiang=db.getShiftMakan(2,userID);
+        shiftMalam=db.getShiftMakan(3,userID);
         daftarMakananSarapan=db.getData_tb_makanan_By_Shift(shiftSarapan.getShift_makan_id());
         daftarMakananSiang=db.getData_tb_makanan_By_Shift(shiftSiang.getShift_makan_id());
         daftarMakananMalam=db.getData_tb_makanan_By_Shift(shiftMalam.getShift_makan_id());
+        target_kalori=programModel.getTarget_kalori();
+        tv_target_kalori.setText(Integer.toString(target_kalori));
         mulaiAdapter();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -78,7 +87,7 @@ public class Dashboard extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.btn_profile:
-                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
@@ -113,14 +122,19 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(halamanTambahMakanMalam);
             }
         });
+
     }
 
     public void mulaiAdapter() {
+        total_kalori=shiftSarapan.getTotal_kalori()+shiftSiang.getTotal_kalori()+shiftMalam.getTotal_kalori();
         tv_kalori_sarapan.setText(Integer.toString(shiftSarapan.getTotal_kalori()));
         tv_kalori_mkn_siang.setText(Integer.toString(shiftSiang.getTotal_kalori()));
         tv_kalori_mkn_malam.setText(Integer.toString(shiftMalam.getTotal_kalori()));
-        tv_total_kalori.setText(Integer.toString(shiftSarapan.getTotal_kalori()+shiftSiang.getTotal_kalori()+shiftMalam.getTotal_kalori()));
-
+        tv_total_kalori.setText(Integer.toString(total_kalori));
+        tv_sisa_kalori.setText(Integer.toString(target_kalori-total_kalori));
+        Log.d("kalorian",Integer.toString(target_kalori));
+        Log.d("kalorian",Integer.toString(total_kalori));
+        Log.d("kalorian",Integer.toString(target_kalori-total_kalori));
         sarapanRecyclerView.setHasFixedSize(false);
         mknSiangRecyclerView.setHasFixedSize(false);
         mknMalamRecyclerView.setHasFixedSize(false);

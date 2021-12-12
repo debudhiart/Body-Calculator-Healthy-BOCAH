@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
@@ -16,7 +17,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
+import id.budhiarta.praktikumprogmob.model.Model_tb_program;
 import id.budhiarta.praktikumprogmob.model.Model_tb_shift_makan;
+import id.budhiarta.praktikumprogmob.model.Model_tb_user;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -48,6 +51,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TB_DETAIL_SHIFT="tb_detail_shift";
     public static final String DETAIL_SHIFT_ID = "detail_shift_id";
 
+    public static final String TB_PROGRAM="tb_program";
+    public static final String ID_PROGRAM="id_program";
+    public static final String TANGGAL_DIBUAT="tgl_dibuat";
+    public static final String UMUR_AT_PROGRAM="umur_at_program";
+    public static final String BERAT_BADAN="berat_badan";
+    public static final String TINGGI_BADAN="tinggi_badan";
+    public static final String TARGET_KALORI="target_kalori";
+    public static final String AKTIFITAS_TUBUH="aktifitas_tubuh";
+    public static final String JENIS_PROGRAM="jenis_program";
+
+
     private Context context;
 
     private SQLiteDatabase db;
@@ -71,15 +85,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String queryCreateTabelDetailShift = "CREATE TABLE " + TB_DETAIL_SHIFT + "(" + DETAIL_SHIFT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + makanan_id + " INTEGER, " + SHIFT_MAKAN_ID + " INTEGER, FOREIGN KEY ("+makanan_id+") REFERENCES "+tb_makanan+"("+makanan_id+") ON DELETE CASCADE ON UPDATE NO ACTION, FOREIGN KEY ("+SHIFT_MAKAN_ID+") REFERENCES "+TB_SHIFT_MAKAN+"("+SHIFT_MAKAN_ID+") ON DELETE CASCADE ON UPDATE NO ACTION)";
 
+        String queryCreateTableProgram="CREATE TABLE "+TB_PROGRAM+" ( "+ID_PROGRAM+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TANGGAL_DIBUAT+" TEXT, "+UMUR_AT_PROGRAM+" INTEGER, "+BERAT_BADAN+" INTEGER, "+TINGGI_BADAN+" INTEGER, "+TARGET_KALORI+" INTEGER, "+AKTIFITAS_TUBUH+" TEXT, "+JENIS_PROGRAM+" TEXT, "+user_id+" INTEGER, FOREIGN KEY("+user_id+") REFERENCES "+tb_user+"("+user_id+") ON DELETE CASCADE ON UPDATE NO ACTION)";
+
         db.execSQL(queryCreateTabelUser);
         db.execSQL(queryCreateTabelMakanan);
         db.execSQL(queryCreateTabelShiftMakan);
         db.execSQL(queryCreateTabelDetailShift);
+        db.execSQL(queryCreateTableProgram);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + tb_user);
+        db.execSQL("DROP TABLE IF EXISTS " + tb_makanan);
+        db.execSQL("DROP TABLE IF EXISTS " + TB_SHIFT_MAKAN);
+        db.execSQL("DROP TABLE IF EXISTS " + TB_DETAIL_SHIFT);
+        db.execSQL("DROP TABLE IF EXISTS " + TB_PROGRAM);
     }
 
     public Cursor getAllData_tb_user(){
@@ -240,6 +261,64 @@ public class DBHelper extends SQLiteOpenHelper {
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
+        }
+    }
+
+    public void insertProgramData(Model_tb_program model_tb_program){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(TANGGAL_DIBUAT,model_tb_program.getTgl_dibuat());
+        values.put(UMUR_AT_PROGRAM,model_tb_program.getUmur_at_program());
+        values.put(BERAT_BADAN,model_tb_program.getBerat_badan());
+        values.put(TINGGI_BADAN,model_tb_program.getTinggi_badan());
+        values.put(TARGET_KALORI,model_tb_program.getTarget_kalori());
+        values.put(JENIS_PROGRAM,model_tb_program.getJenis_program());
+        values.put(AKTIFITAS_TUBUH,model_tb_program.getAktifitas_tubuh());
+        values.put(user_id,1);
+        db.insert(TB_PROGRAM,null,values);
+    }
+
+    public Model_tb_program getProgram(int user_id){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Model_tb_program programModel;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TB_PROGRAM+" WHERE "+user_id+"="+Integer.toString(user_id),null);
+        cursor.moveToLast();
+        programModel=new Model_tb_program(
+                cursor.getInt(cursor.getColumnIndex(UMUR_AT_PROGRAM)),
+                cursor.getInt(cursor.getColumnIndex(BERAT_BADAN)),
+                cursor.getInt(cursor.getColumnIndex(TINGGI_BADAN)),
+                cursor.getInt(cursor.getColumnIndex(TARGET_KALORI)),
+                cursor.getString(cursor.getColumnIndex(TANGGAL_DIBUAT)),
+                cursor.getString(cursor.getColumnIndex(AKTIFITAS_TUBUH)),
+                cursor.getString(cursor.getColumnIndex(JENIS_PROGRAM))
+        );
+        programModel.setId_program(cursor.getInt(cursor.getColumnIndex(ID_PROGRAM)));
+        return programModel;
+    }
+
+    public Cursor login(String login_nama_depan, String login_password){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Model_tb_user userModel;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_user+" WHERE nama_depan = '"+ login_nama_depan + "' AND password = '"+ login_password +"'", null);
+
+        return cursor;
+    }
+    public void checkAndCreateShift(int user_id){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String tgl_hari_ini=dtf.format(now);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TB_SHIFT_MAKAN+" WHERE "+this.user_id+"="+ user_id +" AND date("+ TANGGAL+") = '"+tgl_hari_ini+"';",null);
+        if(cursor.getCount()<=0){
+            ContentValues values = new ContentValues();
+            values.put(JENIS_SHIFT, "Sarapan");
+            values.put(TOTAL_KALORI,0);
+            values.put(TANGGAL,tgl_hari_ini);
+            values.put(DBHelper.user_id,user_id);
+            db.insert(TB_SHIFT_MAKAN, null, values);
+            values.put(JENIS_SHIFT, "Makan Siang");
+            db.insert(TB_SHIFT_MAKAN, null, values);
+            values.put(JENIS_SHIFT, "Makan Malam");
+            db.insert(TB_SHIFT_MAKAN, null, values);
         }
     }
 }

@@ -40,7 +40,7 @@
                     android:layout_gravity="center">
 
                     <TextView
-                        android:id="@+id/tv_targetKalori"
+                        android:id="@+id/tv_target_kalori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
@@ -112,18 +112,22 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_sisa_kalori"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/poppins_bold"
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/hitam"
                         android:textSize="62px"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tv_id_sisa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Sisa"
                         android:textAlignment="center"

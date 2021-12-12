@@ -8,17 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
+import id.budhiarta.praktikumprogmob.helper.DBHelper;
+import id.budhiarta.praktikumprogmob.model.Model_tb_program;
 
 public class DataProgramActivity extends AppCompatActivity{
 
@@ -28,8 +32,8 @@ public class DataProgramActivity extends AppCompatActivity{
     int intHeight, intWeight;
     RadioGroup rgProgramGander;
     RadioButton rbProgramGander;
-
-
+    private Model_tb_program programModel;
+    private DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +52,14 @@ public class DataProgramActivity extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.btn_profile:
-                        return true;
                     case R.id.btn_dailybook:
-                        startActivity(new Intent(getApplicationContext(), DailyBook.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.btn_dashboard:
                         startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.btn_profile:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -63,6 +67,7 @@ public class DataProgramActivity extends AppCompatActivity{
             }
         });
 
+        db=new DBHelper(this);
         intent = getIntent();
         intAge = Integer.parseInt(intent.getStringExtra("data_age"));
         textGender = intent.getStringExtra("data_gender");
@@ -97,6 +102,7 @@ public class DataProgramActivity extends AppCompatActivity{
                 rgProgramGander = (RadioGroup)findViewById(R.id.rg_program_gender);
                 int genderId = rgProgramGander.getCheckedRadioButtonId();
                 rbProgramGander =findViewById(genderId);
+                int angkaTargetKalori;
 
                 String angkaTinggiBadan = etTinggiBadan.getText().toString();
 
@@ -120,11 +126,16 @@ public class DataProgramActivity extends AppCompatActivity{
                     angkaAktifitas = 1.9;
                 }
 
+            if(rbProgramGander.getText().equals("Laki-laki")){
+                angkaTargetKalori=(int)Math.round(66+(13.7*Integer.parseInt(angkaBeratBadan))+(5*Integer.parseInt(angkaTinggiBadan))-(6.8*Integer.parseInt(angkaUmur))*angkaAktifitas);
+            }else{
+                angkaTargetKalori=(int)Math.round(65.5+(9.6*Integer.parseInt(angkaBeratBadan))+(1.8*Integer.parseInt(angkaTinggiBadan))-(4.7*Integer.parseInt(angkaUmur))*angkaAktifitas);
+            }
 //                Pria :
-//                66+(13,7xberat)+(5xtinggi)-(6,8xumur) =a
+//                66+(13,7xberat)+(5xtinggi)-(6,8xumur) =   *a
 //
 //                Wanita :
-//                655+(9,6xberat)+(1,8xtinggi)-(4,7xumur)=a
+//                655+(9,6xberat)+(1,8xtinggi)-(4,7xumur)= *a
 
 
                 AlertDialog dialog = new AlertDialog.Builder(DataProgramActivity.this).setTitle("Konfirmasi Program")
@@ -145,12 +156,26 @@ public class DataProgramActivity extends AppCompatActivity{
                 btn_lanjutkan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Makassar"));
+                        String tgl_hari_ini=dtf.format(now);
+                        programModel=new Model_tb_program(Integer.parseInt(angkaUmur),
+                                Integer.parseInt(angkaBeratBadan),
+                                Integer.parseInt(angkaTinggiBadan),
+                                angkaTargetKalori,
+                                tgl_hari_ini,
+                                textAktifitas,
+                                textProgram
+                        );
+                        db.insertProgramData(programModel);
                         Toast.makeText(getApplicationContext(), "Ini Lanjut Buat Perhitungan Kalorinya", Toast.LENGTH_SHORT).show();
                     }
                 });
 
             }
         });
+
+
 
 
     }

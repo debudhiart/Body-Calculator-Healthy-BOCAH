@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".EditUserActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,52 +21,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="2">
+                    android:layout_weight="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
 
-                    <TextView
-                        android:id="@+id/tv_id_nama_depan_user"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nama User"
-                        android:layout_marginLeft="66px"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="-19px"
+                    <EditText
+                        android:id="@+id/et_edit_nama_depan_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="20dp"
+                        android:ems="10"
+                        android:fontFamily="@font/poppins_bold"
+                        android:hint="exp: Nama user"
+                        android:inputType="text"
                         android:textColor="@color/hitam"
-                        android:textSize="72px"
-                        android:fontFamily="@font/poppins_bold"/>
+                        android:textSize="72px" />
 
-                    <TextView
-                        android:id="@+id/tv_id_nama_belakang_user"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nama User"
-                        android:layout_marginLeft="66px"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="26px"
+                    <EditText
+                        android:id="@+id/et_edit_nama_belakang_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+
+                        android:layout_marginBottom="20dp"
+                        android:ems="10"
                         android:fontFamily="@font/poppins_regular"
+                        android:hint="exp: Nama user"
+                        android:inputType="text"
                         android:textColor="@color/Abu_abu_gelap"
-                        android:textSize="35px"/>
+                        android:textSize="35px" />
 
                 </LinearLayout>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_edit_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="82px"
-                    android:layout_weight="2"
-                    android:backgroundTint="@color/biru"
-                    android:clickable="true"
-                    app:fabSize="normal"
-                    app:srcCompat="@drawable/ic_baseline_edit_24"
-                    app:tint="@color/white" />
 
             </LinearLayout>
 
@@ -115,23 +108,17 @@
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />
 
-                        <TextView
-                            android:id="@+id/tv_id_input_view_email"
+                        <EditText
+                            android:id="@+id/et_edit_email"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Alamat Email"
-                            android:textColor="@color/hitam"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="20dp"
+                            android:ems="10"
                             android:fontFamily="@font/poppins_semi_bold"
+                            android:hint="exp: username@gmail.com"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/hitam"
                             android:textSize="42px" />
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="2dp"
-                            android:layout_marginTop="2dp"
-                            android:background="@color/Abu_abu_stroke"
-                            android:layout_marginBottom="20dp"/>
 
                         <TextView
                             android:id="@+id/tv_id_label_umur"
@@ -142,23 +129,17 @@
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />
 
-                        <TextView
-                            android:id="@+id/tv_id_input_view_umur"
+                        <EditText
+                            android:id="@+id/et_edit_umur"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="20dp"
+                            android:ems="10"
                             android:fontFamily="@font/poppins_semi_bold"
-                            android:text="Umur"
+                            android:hint="exp: 20"
+                            android:inputType="textEmailAddress"
                             android:textColor="@color/hitam"
                             android:textSize="42px" />
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="2dp"
-                            android:layout_marginTop="2dp"
-                            android:background="@color/Abu_abu_stroke"
-                            android:layout_marginBottom="10dp"/>
 
                         <TextView
                             android:id="@+id/tv_id_label_jenis_kelamin"
@@ -169,31 +150,37 @@
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />
 
-                        <TextView
-                            android:id="@+id/tv_id_input_view_jenis_kelamin"
+                        <RadioGroup
+                            android:id="@+id/rg_edit_gender"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
-                            android:fontFamily="@font/poppins_semi_bold"
-                            android:text="Jenis Kelamin"
-                            android:textColor="@color/hitam"
-                            android:textSize="42px" />
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
 
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="2dp"
-                            android:layout_marginTop="2dp"
-                            android:background="@color/Abu_abu_stroke"
-                            android:layout_marginBottom="10dp"/>
+                            <RadioButton
+                                android:id="@+id/rb_edit_laki_laki"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:text="Laki-laki" />
+
+                            <RadioButton
+                                android:id="@+id/rb_edit_perempuan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:text="Perempuan" />
+
+                        </RadioGroup>
 
                         <Button
-                            android:id="@+id/btn_logout"
+                            android:id="@+id/btn_simpan_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/biru"
                             android:fontFamily="@font/poppins_semi_bold"
-                            android:text="Logout"
+                            android:text="Simpan Perubahan"
                             android:textAllCaps="false"
                             android:textColor="@color/white" />
 
@@ -203,9 +190,14 @@
 
             </LinearLayout>
 
+
+
         </LinearLayout>
 
     </ScrollView>
+
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -217,6 +209,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"/>
-
 
 </RelativeLayout>

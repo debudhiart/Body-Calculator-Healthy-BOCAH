@@ -44,8 +44,10 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_register);
+
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Daftar BOCAH");
 
         Log.i(TAG, "onCreate - Budhi");
 
@@ -155,6 +157,15 @@ public class Register extends AppCompatActivity {
                         startActivity(suksesDaftar);
                     }
                 });
+            }
+        });
+
+        TextView tvMasukSekarang = findViewById(R.id.tv_masuk_sekarang);
+        tvMasukSekarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLogin = new Intent(Register.this, LoginActivity.class);
+                startActivity(intentLogin);
             }
         });
 

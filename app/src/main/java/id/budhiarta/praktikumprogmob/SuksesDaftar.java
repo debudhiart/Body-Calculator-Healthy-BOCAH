@@ -30,7 +30,9 @@ public class SuksesDaftar extends AppCompatActivity {
         btn_halamanDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Tampil Halaman Dashboard", Toast.LENGTH_SHORT).show();
+                Intent intentDashboard = new Intent(SuksesDaftar.this, Dashboard.class);
+                startActivity(intentDashboard);
+//                Toast.makeText(getApplicationContext(),"Tampil Halaman Dashboard", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -38,7 +40,9 @@ public class SuksesDaftar extends AppCompatActivity {
         btn_halamanProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Tampil Halaman Profile", Toast.LENGTH_SHORT).show();
+                Intent intentProfile = new Intent(SuksesDaftar.this, ProfileActivity.class);
+                startActivity(intentProfile);
+//                Toast.makeText(getApplicationContext(),"Tampil Halaman Profile", Toast.LENGTH_SHORT).show();
             }
         });
     }

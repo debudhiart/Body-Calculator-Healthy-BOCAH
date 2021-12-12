@@ -1,34 +1,29 @@
 package id.budhiarta.praktikumprogmob;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
@@ -38,9 +33,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.content.ContentValues.TAG;
-import static android.graphics.Color.parseColor;
 
 public class TambahMakanan extends AppCompatActivity {
 
@@ -89,7 +81,7 @@ public class TambahMakanan extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.btn_profile:
-                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -182,26 +174,29 @@ public class TambahMakanan extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 final int position = viewHolder.getAdapterPosition();
                 if (direction == ItemTouchHelper.RIGHT){
-//            Toast.makeText(this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(adapterMakanan.getContext());
-                    builder.setTitle("Hapus Makanan");
-                    builder.setMessage("Yakin Hapus Makanan?");
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    androidx.appcompat.app.AlertDialog dialog = new AlertDialog.Builder(TambahMakanan.this).setTitle("Hapus Makanan")
+                            .setMessage("Yakin Hapus Makanan?")
+                            .setPositiveButton("Lanjutkan", null)
+                            .setNegativeButton("Kembali", null)
+                            .show();
+                    Button btn_kembali = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    btn_kembali.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
+                            adapterMakanan.notifyItemChanged(position);
+                            dialog.dismiss();
+                        }
+                    });
+                    Button btn_lanjut = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    btn_lanjut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
                             Model_tb_makanan item = adapterMakanan.getMakananList().get(position);
                             db.deleteData_tb_makanan(item.getMakanan_id());
                             adapterMakanan.deleteMakanan(position);
                         }
                     });
-                    builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            adapterMakanan.notifyItemChanged(position);
-                        }
-                    });
-                    AlertDialog dialog =builder.create();
-                    dialog.show();
+//            Toast.makeText(this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
                 }else {
                     makananModel = new Model_tb_makanan(
                             daftarMakananAdapter.get(position).getMakanan_id(),
