@@ -232,26 +232,6 @@ public class TambahMakanan extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
 
-
-//            rincianPengeluaranAdapter.setOnItemClickListener(new RincianPengeluaranAdapter.OnItemClickListener() {
-//                @Override
-//                public void onDeleteClick(int position) {
-//                    removeItem(position);
-//                }
-//
-//                @Override
-//                public void onEditClick(int position) {
-//                    editItem(position);
-//                }
-//
-//                @Override
-//                public void onViewClick(int position) {
-//                    Intent intent = new Intent(DashboardActivity.this, ViewRincianPengeluaranActivity.class);
-//                    intent.putExtra("Tampil Data", datarincianPengeluaranAdapter.get(position));
-//
-//                    startActivity(intent);
-//                }
-//            });
     }
 
     @Override
