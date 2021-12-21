@@ -40,12 +40,15 @@ public class Dashboard extends AppCompatActivity {
     private TextView tv_kalori_sarapan,tv_kalori_mkn_siang,tv_kalori_mkn_malam,tv_total_kalori,tv_target_kalori,tv_sisa_kalori;
     private RecyclerView sarapanRecyclerView,mknSiangRecyclerView,mknMalamRecyclerView;
     private int total_kalori,target_kalori;
+
+    int userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        int userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
+        userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -72,6 +75,8 @@ public class Dashboard extends AppCompatActivity {
         target_kalori=programModel.getTarget_kalori();
         tv_target_kalori.setText(Integer.toString(target_kalori));
         mulaiAdapter();
+
+//        Toast.makeText(getApplicationContext(), daftarMakananSarapan.get(0).toString() , Toast.LENGTH_SHORT).show();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.btn_dashboard);
@@ -150,9 +155,9 @@ public class Dashboard extends AppCompatActivity {
         mknSiangRecyclerView.setAdapter(adapterMakananSiang);
         mknMalamRecyclerView.setLayoutManager(mknMalamLayoutManager);
         mknMalamRecyclerView.setAdapter(adapterMakananMalam);
-        createItemTouchHelper(sarapanRecyclerView,adapterMakananSarapan,1);
-        createItemTouchHelper(mknSiangRecyclerView,adapterMakananSiang,2);
-        createItemTouchHelper(mknMalamRecyclerView,adapterMakananMalam,3);
+        createItemTouchHelper(sarapanRecyclerView,adapterMakananSarapan,shiftSarapan.getShift_makan_id());
+        createItemTouchHelper(mknSiangRecyclerView,adapterMakananSiang,shiftSiang.getShift_makan_id());
+        createItemTouchHelper(mknMalamRecyclerView,adapterMakananMalam,shiftMalam.getShift_makan_id());
 //        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 //            @Override
 //            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -203,7 +208,7 @@ public class Dashboard extends AppCompatActivity {
 //        itemTouchHelper.attachToRecyclerView(mknMalamRecyclerView);
 
     }
-    public void createItemTouchHelper(RecyclerView jenis_rv, AdapterMakanan jenis_adapter, int jenis_shift){
+    public void createItemTouchHelper(RecyclerView jenis_rv, AdapterMakanan jenis_adapter, int id_shift){
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -223,7 +228,18 @@ public class Dashboard extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             Model_tb_makanan item = jenis_adapter.getMakananList().get(position);
                             jenis_adapter.deleteMakanan(position);
-                            db.deleteDataMakananInShiftMakanan(item.getMakanan_id(),jenis_shift);
+                            db.deleteDataMakananInShiftMakanan(item,id_shift);
+
+                            shiftSarapan=db.getShiftMakan(1,userID);
+                            shiftSiang=db.getShiftMakan(2,userID);
+                            shiftMalam=db.getShiftMakan(3,userID);
+
+                            total_kalori=shiftSarapan.getTotal_kalori()+shiftSiang.getTotal_kalori()+shiftMalam.getTotal_kalori();
+                            tv_kalori_sarapan.setText(Integer.toString(shiftSarapan.getTotal_kalori()));
+                            tv_kalori_mkn_siang.setText(Integer.toString(shiftSiang.getTotal_kalori()));
+                            tv_kalori_mkn_malam.setText(Integer.toString(shiftMalam.getTotal_kalori()));
+                            tv_total_kalori.setText(Integer.toString(total_kalori));
+                            tv_sisa_kalori.setText(Integer.toString(target_kalori-total_kalori));
 
                         }
                     });
@@ -251,4 +267,7 @@ public class Dashboard extends AppCompatActivity {
 
         itemTouchHelper.attachToRecyclerView(jenis_rv);
     }
+
+
+
 }

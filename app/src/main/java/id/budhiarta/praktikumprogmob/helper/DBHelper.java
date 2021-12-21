@@ -225,8 +225,9 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return data;
     }
-    public void deleteDataMakananInShiftMakanan(int makanan_id,int shift_makan_id){
-        db.delete(TB_DETAIL_SHIFT,this.DETAIL_SHIFT_ID+" IN " +"(SELECT "+DETAIL_SHIFT_ID+" FROM "+TB_DETAIL_SHIFT+" WHERE "+this.makanan_id + "=" + makanan_id+" AND "+SHIFT_MAKAN_ID+"="+shift_makan_id+" LIMIT 1)", null );
+    public void deleteDataMakananInShiftMakanan(Model_tb_makanan makananModel,int shift_makan_id){
+        db.delete(TB_DETAIL_SHIFT,this.DETAIL_SHIFT_ID+" IN " +"(SELECT "+DETAIL_SHIFT_ID+" FROM "+TB_DETAIL_SHIFT+" WHERE "+this.makanan_id + "=" + makananModel.getMakanan_id()+" AND "+SHIFT_MAKAN_ID+"="+shift_makan_id+" LIMIT 1)", null );
+        updateShiftMakan(shift_makan_id,2,makananModel.getKalori());
     }
 
     public void updateShiftMakan(int shift_makan_id,int opsi, int kalori){
@@ -320,5 +321,13 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(JENIS_SHIFT, "Makan Malam");
             db.insert(TB_SHIFT_MAKAN, null, values);
         }
+    }
+
+    public Cursor  getDataUser(int id_user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Model_tb_user userModel;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_user+" WHERE "+user_id+"="+id_user,null);
+
+        return cursor;
     }
 }

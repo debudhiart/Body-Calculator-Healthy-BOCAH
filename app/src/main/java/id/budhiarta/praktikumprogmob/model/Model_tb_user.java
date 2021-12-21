@@ -1,6 +1,9 @@
 package id.budhiarta.praktikumprogmob.model;
 
-public class Model_tb_user {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Model_tb_user implements Parcelable {
 
     int user_id, umur, term_and_condition;
     String password, jenis_kelamin, email, nama_belakang, nama_depan;
@@ -15,6 +18,29 @@ public class Model_tb_user {
         this.nama_belakang = nama_belakang;
         this.nama_depan = nama_depan;
     }
+
+    protected Model_tb_user(Parcel in) {
+        user_id = in.readInt();
+        umur = in.readInt();
+        term_and_condition = in.readInt();
+        password = in.readString();
+        jenis_kelamin = in.readString();
+        email = in.readString();
+        nama_belakang = in.readString();
+        nama_depan = in.readString();
+    }
+
+    public static final Creator<Model_tb_user> CREATOR = new Creator<Model_tb_user>() {
+        @Override
+        public Model_tb_user createFromParcel(Parcel in) {
+            return new Model_tb_user(in);
+        }
+
+        @Override
+        public Model_tb_user[] newArray(int size) {
+            return new Model_tb_user[size];
+        }
+    };
 
     public int getUser_id() {
         return user_id;
@@ -78,5 +104,22 @@ public class Model_tb_user {
 
     public void setNama_depan(String nama_depan) {
         this.nama_depan = nama_depan;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(user_id);
+        dest.writeInt(umur);
+        dest.writeInt(term_and_condition);
+        dest.writeString(password);
+        dest.writeString(jenis_kelamin);
+        dest.writeString(email);
+        dest.writeString(nama_belakang);
+        dest.writeString(nama_depan);
     }
 }

@@ -116,7 +116,7 @@
                             android:textSize="35px"  />
 
                         <TextView
-                            android:id="@+id/tv_id_input_view_email"
+                            android:id="@+id/tv_id_view_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Alamat Email"
@@ -143,7 +143,7 @@
                             android:textSize="35px"  />
 
                         <TextView
-                            android:id="@+id/tv_id_input_view_umur"
+                            android:id="@+id/tv_id_view_umur"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
@@ -170,7 +170,7 @@
                             android:textSize="35px"  />
 
                         <TextView
-                            android:id="@+id/tv_id_input_view_jenis_kelamin"
+                            android:id="@+id/tv_id_view_jenis_kelamin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
@@ -190,7 +190,7 @@
                         <Button
                             android:id="@+id/btn_logout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             android:backgroundTint="@color/biru"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:text="Logout"

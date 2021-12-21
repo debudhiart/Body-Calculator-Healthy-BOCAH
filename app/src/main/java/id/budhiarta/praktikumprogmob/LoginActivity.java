@@ -5,13 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_user;
+
+import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,18 +47,25 @@ public class LoginActivity extends AppCompatActivity {
                 EditText etPassword = findViewById(R.id.et_password);
                 String textPassword = etPassword.getText().toString();
 
-                Cursor cursor = (Cursor) dbHelper.login(textLoginNamaDepan, textPassword);;
-                cursor.moveToLast();
-                userModel=new Model_tb_user(
-                        cursor.getInt(cursor.getColumnIndex(DBHelper.user_id)),
-                        cursor.getInt(cursor.getColumnIndex(DBHelper.umur)),
-                        cursor.getInt(cursor.getColumnIndex(DBHelper.term_and_condition)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.password)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.jenis_kelamin)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.email)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.nama_belakang)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.nama_depan))
-                );
+                try {
+                    Cursor cursor = (Cursor) dbHelper.login(textLoginNamaDepan, textPassword);;
+                    cursor.moveToLast();
+                    userModel=new Model_tb_user(
+                            cursor.getInt(cursor.getColumnIndex(DBHelper.user_id)),
+                            cursor.getInt(cursor.getColumnIndex(DBHelper.umur)),
+                            cursor.getInt(cursor.getColumnIndex(DBHelper.term_and_condition)),
+                            cursor.getString(cursor.getColumnIndex(DBHelper.password)),
+                            cursor.getString(cursor.getColumnIndex(DBHelper.jenis_kelamin)),
+                            cursor.getString(cursor.getColumnIndex(DBHelper.email)),
+                            cursor.getString(cursor.getColumnIndex(DBHelper.nama_belakang)),
+                            cursor.getString(cursor.getColumnIndex(DBHelper.nama_depan))
+                    );
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Nama Depan atau Password salah", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Error:" + e.getMessage());
+                    return;
+                }
+
 //                Toast.makeText(getApplicationContext(),"userModel: " +userModel.getNama_depan(), Toast.LENGTH_SHORT ).show();
 
 

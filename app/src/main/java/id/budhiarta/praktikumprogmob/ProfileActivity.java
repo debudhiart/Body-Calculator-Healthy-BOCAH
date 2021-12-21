@@ -5,21 +5,55 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import id.budhiarta.praktikumprogmob.helper.DBHelper;
+import id.budhiarta.praktikumprogmob.model.Model_tb_user;
+
 public class ProfileActivity extends AppCompatActivity {
     UserSession userSession;
+    DBHelper dbHelper;
+    Model_tb_user userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        int userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
+        dbHelper = new DBHelper(this);
+
+        try {
+            Cursor cursor = (Cursor) dbHelper.getDataUser(userID);
+            cursor.moveToLast();
+            userModel=new Model_tb_user(
+                    cursor.getInt(cursor.getColumnIndex(DBHelper.user_id)),
+                    cursor.getInt(cursor.getColumnIndex(DBHelper.umur)),
+                    cursor.getInt(cursor.getColumnIndex(DBHelper.term_and_condition)),
+                    cursor.getString(cursor.getColumnIndex(DBHelper.password)),
+                    cursor.getString(cursor.getColumnIndex(DBHelper.jenis_kelamin)),
+                    cursor.getString(cursor.getColumnIndex(DBHelper.email)),
+                    cursor.getString(cursor.getColumnIndex(DBHelper.nama_belakang)),
+                    cursor.getString(cursor.getColumnIndex(DBHelper.nama_depan))
+            );
+        }catch (Exception e){
+            Log.e("error user", "Error:" + e.getMessage());
+            return;
+        }
+
+//        Toast.makeText(getApplicationContext(), "userModel:" + userModel.getNama_depan(), Toast.LENGTH_SHORT).show();
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -47,6 +81,22 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        TextView tvNamaBelakangUser = findViewById(R.id.tv_id_nama_belakang_user);
+        tvNamaBelakangUser.setText(userModel.getNama_belakang());
+
+        TextView tvNamaDepanUser = findViewById(R.id.tv_id_nama_depan_user);
+        tvNamaDepanUser.setText(userModel.getNama_depan());
+
+        TextView tvViewJenisKelamin = findViewById(R.id.tv_id_view_jenis_kelamin);
+        tvViewJenisKelamin.setText(userModel.getJenis_kelamin());
+
+        TextView tvViewUmur = findViewById(R.id.tv_id_view_umur);
+        tvViewUmur.setText(Integer.toString(userModel.getUmur()));
+
+        TextView tvViewEmail = findViewById(R.id.tv_id_view_email);
+        tvViewEmail.setText(userModel.getEmail());
+
 
         Button btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +135,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent viewTambahMakanan = new Intent(ProfileActivity.this, EditUserActivity.class);
+                viewTambahMakanan.putExtra("dataUser", (Parcelable) userModel);
                 startActivity(viewTambahMakanan);
             }
         });
