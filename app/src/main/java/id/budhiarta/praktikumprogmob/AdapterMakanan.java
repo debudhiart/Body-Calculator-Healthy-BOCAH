@@ -33,10 +33,6 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.AdapterM
         this.id_shift=id_shift;
     }
 
-//    public AdapterMakanan(HalperDataBase myDB, MainActivity activity){
-//        this.activity = activity;
-//        this.myDB = myDB;
-//    }
 
     @NonNull
     @Override

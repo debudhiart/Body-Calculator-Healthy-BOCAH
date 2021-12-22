@@ -37,10 +37,6 @@ public class BMIActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b_m_i);
 
-//        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-//        actionBar.setHomeButtonEnabled(true);
-//        actionBar.setTitle("Values Body Mass Index");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         androidx.appcompat.app.ActionBar actionBar =getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle("Values Body Mass Index");

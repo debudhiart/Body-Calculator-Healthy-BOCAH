@@ -198,54 +198,6 @@ public class Dashboard extends AppCompatActivity {
         createItemTouchHelper(sarapanRecyclerView,adapterMakananSarapan,shiftSarapan.getShift_makan_id());
         createItemTouchHelper(mknSiangRecyclerView,adapterMakananSiang,shiftSiang.getShift_makan_id());
         createItemTouchHelper(mknMalamRecyclerView,adapterMakananMalam,shiftMalam.getShift_makan_id());
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                final int position = viewHolder.getAdapterPosition();
-//                if (direction == ItemTouchHelper.RIGHT) {
-////            Toast.makeText(this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(adapterMakanan.getContext());
-//                    builder.setTitle("Hapus Makanan");
-//                    builder.setMessage("Yakin Hapus Makanan?");
-//                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Model_tb_makanan item = adapterMakanan.getMakananList().get(position);
-//                            adapterMakanan.deleteMakanan(position);
-//                            db.deleteDataMakananInShiftMakanan(item.getMakanan_id(),jenis_shift);
-//
-//                        }
-//                    });
-//                    builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            adapterMakanan.notifyItemChanged(position);
-//                        }
-//                    });
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//                }
-//            }
-//
-//            @Override
-//            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-//                        .addSwipeRightBackgroundColor(Color.RED)
-//                        .addSwipeRightActionIcon(R.drawable.ic_baseline_delete_24)
-//                        .create()
-//                        .decorate();
-//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-//            }
-//        });
-//
-//        itemTouchHelper.attachToRecyclerView(sarapanRecyclerView);
-//        itemTouchHelper.attachToRecyclerView(mknSiangRecyclerView);
-//        itemTouchHelper.attachToRecyclerView(mknMalamRecyclerView);
 
     }
     public void createItemTouchHelper(RecyclerView jenis_rv, AdapterMakanan jenis_adapter, int id_shift){
