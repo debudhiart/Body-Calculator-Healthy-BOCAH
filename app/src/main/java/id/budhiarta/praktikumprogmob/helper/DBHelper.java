@@ -238,11 +238,11 @@ public class DBHelper extends SQLiteOpenHelper {
         if(opsi==1){
                 values.put(TOTAL_KALORI,total_kalori+kalori);
                 int hasil=db.update(TB_SHIFT_MAKAN,values,SHIFT_MAKAN_ID+"=?",new String[]{Integer.toString(shift_makan_id)});
-                Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
         }else{
             values.put(TOTAL_KALORI,total_kalori-kalori);
             int hasil=db.update(TB_SHIFT_MAKAN,values,SHIFT_MAKAN_ID+"=?",new String[]{Integer.toString(shift_makan_id)});
-            Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
+//            Toast.makeText(context,"Hasil : "+Integer.toString(hasil), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -275,25 +275,30 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TARGET_KALORI,model_tb_program.getTarget_kalori());
         values.put(JENIS_PROGRAM,model_tb_program.getJenis_program());
         values.put(AKTIFITAS_TUBUH,model_tb_program.getAktifitas_tubuh());
-        values.put(user_id,1);
+        values.put(user_id,model_tb_program.getUser_id());
         db.insert(TB_PROGRAM,null,values);
     }
 
-    public Model_tb_program getProgram(int user_id){
+    public Model_tb_program getProgram(int id_user){
         SQLiteDatabase db=this.getReadableDatabase();
         Model_tb_program programModel;
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TB_PROGRAM+" WHERE "+user_id+"="+Integer.toString(user_id),null);
-        cursor.moveToLast();
-        programModel=new Model_tb_program(
-                cursor.getInt(cursor.getColumnIndex(UMUR_AT_PROGRAM)),
-                cursor.getInt(cursor.getColumnIndex(BERAT_BADAN)),
-                cursor.getInt(cursor.getColumnIndex(TINGGI_BADAN)),
-                cursor.getInt(cursor.getColumnIndex(TARGET_KALORI)),
-                cursor.getString(cursor.getColumnIndex(TANGGAL_DIBUAT)),
-                cursor.getString(cursor.getColumnIndex(AKTIFITAS_TUBUH)),
-                cursor.getString(cursor.getColumnIndex(JENIS_PROGRAM))
-        );
-        programModel.setId_program(cursor.getInt(cursor.getColumnIndex(ID_PROGRAM)));
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TB_PROGRAM+" WHERE "+user_id+"="+Integer.toString(id_user),null);
+        if(cursor.moveToLast()){
+            programModel=new Model_tb_program(
+                    cursor.getInt(cursor.getColumnIndex(UMUR_AT_PROGRAM)),
+                    cursor.getInt(cursor.getColumnIndex(BERAT_BADAN)),
+                    cursor.getInt(cursor.getColumnIndex(TINGGI_BADAN)),
+                    cursor.getInt(cursor.getColumnIndex(TARGET_KALORI)),
+                    cursor.getString(cursor.getColumnIndex(TANGGAL_DIBUAT)),
+                    cursor.getString(cursor.getColumnIndex(AKTIFITAS_TUBUH)),
+                    cursor.getString(cursor.getColumnIndex(JENIS_PROGRAM)),
+                    cursor.getInt(cursor.getColumnIndex(user_id))
+            );
+            programModel.setId_program(cursor.getInt(cursor.getColumnIndex(ID_PROGRAM)));
+        }else{
+            programModel= new Model_tb_program(0);
+        }
+
         return programModel;
     }
 

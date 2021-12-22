@@ -1,10 +1,10 @@
 package id.budhiarta.praktikumprogmob.model;
 
 public class Model_tb_program {
-    private int id_program,umur_at_program,berat_badan,tinggi_badan,target_kalori;
+    private int id_program,umur_at_program,berat_badan,tinggi_badan,target_kalori, user_id;
     private String tgl_dibuat,aktifitas_tubuh,jenis_program;
 
-    public Model_tb_program(int umur_at_program, int berat_badan, int tinggi_badan, int target_kalori, String tgl_dibuat, String aktifitas_tubuh, String jenis_program) {
+    public Model_tb_program(int umur_at_program, int berat_badan, int tinggi_badan, int target_kalori, String tgl_dibuat, String aktifitas_tubuh, String jenis_program, int user_id) {
         this.umur_at_program = umur_at_program;
         this.berat_badan = berat_badan;
         this.tinggi_badan = tinggi_badan;
@@ -12,6 +12,11 @@ public class Model_tb_program {
         this.tgl_dibuat = tgl_dibuat;
         this.aktifitas_tubuh = aktifitas_tubuh;
         this.jenis_program = jenis_program;
+        this.user_id = user_id;
+    }
+
+    public Model_tb_program(int target_kalori){
+        this.target_kalori = target_kalori;
     }
 
     public int getId_program() {
@@ -76,5 +81,13 @@ public class Model_tb_program {
 
     public void setJenis_program(String jenis_program) {
         this.jenis_program = jenis_program;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

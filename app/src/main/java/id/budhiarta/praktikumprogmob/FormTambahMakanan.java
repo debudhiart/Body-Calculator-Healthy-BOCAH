@@ -160,7 +160,7 @@ public class FormTambahMakanan extends AppCompatActivity {
 
     private void insertAPIMakanan(String textNamaMakanan, String textSatuan, String angkaKalori, String angkaProtein, String angkaLemak) {
 
-        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.2:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.3:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
         makananAPI = retrofit.create(MakananAPI.class);
         makananAPI.insertMakananAPI(textNamaMakanan, textSatuan, Integer.parseInt(angkaKalori), Integer.parseInt(angkaProtein), Integer.parseInt(angkaLemak)).enqueue(new Callback<Model_tb_makanan>() {
             @Override
@@ -170,7 +170,7 @@ public class FormTambahMakanan extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Model_tb_makanan> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Bangsat", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Bangsat", Toast.LENGTH_SHORT).show();
             }
         });
     }

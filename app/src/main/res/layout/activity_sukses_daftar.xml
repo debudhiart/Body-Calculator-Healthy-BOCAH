@@ -48,7 +48,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btn_halaman_dashboard"
+                android:id="@+id/btn_kembali_login"
                 android:padding="37px"
                 android:layout_marginTop="55dp"
                 android:layout_width="match_parent"
@@ -57,20 +57,9 @@
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="35px"
                 android:layout_marginBottom="10dp"
-                android:text="@string/txt_btn_halaman_dashboard"
+                android:text="@string/txt_btn_kembali_login"
                 android:textAllCaps="false"/>
-            <Button
-                android:id="@+id/btn_halaman_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="35px"
-                android:textColor="@color/Abu_abu_gelap"
-                android:layout_marginBottom="10dp"
-                android:text="@string/txt_btn_halaman_profile"
-                android:textAllCaps="false"
-                android:stateListAnimator="@null"/>
+
         </LinearLayout>
     </ScrollView>
 

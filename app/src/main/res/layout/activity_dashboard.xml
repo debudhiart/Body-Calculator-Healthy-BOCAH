@@ -44,7 +44,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="2.810"
+                        android:text="2.170"
+                        android:layout_gravity="center_horizontal"
                         android:textColor="@color/hitam"
                         android:textSize="62px"
                         android:textStyle="bold" />
@@ -53,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Sasaran"
+                        android:layout_gravity="center_horizontal"
                         android:textAlignment="center"
                         android:textColor="@color/hitam"
                         android:textSize="29px" />

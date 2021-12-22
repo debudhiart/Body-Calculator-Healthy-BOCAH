@@ -34,10 +34,15 @@ public class DataProgramActivity extends AppCompatActivity{
     RadioButton rbProgramGander;
     private Model_tb_program programModel;
     private DBHelper db;
+
+    int userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_program);
+
+        userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -137,7 +142,6 @@ public class DataProgramActivity extends AppCompatActivity{
 //                Wanita :
 //                655+(9,6xberat)+(1,8xtinggi)-(4,7xumur)= *a
 
-
                 AlertDialog dialog = new AlertDialog.Builder(DataProgramActivity.this).setTitle("Konfirmasi Program")
                         .setMessage("Jenis Kelamin: " + rbProgramGander.getText() + "\n Tinggi Badan:"+ Integer.parseInt(angkaTinggiBadan) +
                                 "\n Berat Badan:"+ Integer.parseInt(angkaBeratBadan) + "\n Umur:"+ Integer.parseInt(angkaUmur) + "\n Aktifitas: "
@@ -165,10 +169,13 @@ public class DataProgramActivity extends AppCompatActivity{
                                 angkaTargetKalori,
                                 tgl_hari_ini,
                                 textAktifitas,
-                                textProgram
+                                textProgram,
+                                userID
                         );
                         db.insertProgramData(programModel);
-                        Toast.makeText(getApplicationContext(), "Ini Lanjut Buat Perhitungan Kalorinya", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Ini Lanjut Buat Perhitungan Kalorinya", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DataProgramActivity.this, Dashboard.class);
+                        startActivity(intent);
                     }
                 });
 

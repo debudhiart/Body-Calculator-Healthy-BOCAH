@@ -26,22 +26,12 @@ public class SuksesDaftar extends AppCompatActivity {
         TextView tvIdPesanSapa = (TextView) findViewById(R.id.tv_id_pesanSapa);
         tvIdPesanSapa.setText("Hai " + txt_namaDepan);
 
-        Button btn_halamanDashboard = (Button) findViewById(R.id.btn_halaman_dashboard);
-        btn_halamanDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentDashboard = new Intent(SuksesDaftar.this, Dashboard.class);
-                startActivity(intentDashboard);
-//                Toast.makeText(getApplicationContext(),"Tampil Halaman Dashboard", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Button btn_halamanProfile = (Button)  findViewById(R.id.btn_halaman_profile);
+        Button btn_halamanProfile = (Button)  findViewById(R.id.btn_kembali_login);
         btn_halamanProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentProfile = new Intent(SuksesDaftar.this, ProfileActivity.class);
-                startActivity(intentProfile);
+                Intent intentLogin = new Intent(SuksesDaftar.this, LoginActivity.class);
+                startActivity(intentLogin);
 //                Toast.makeText(getApplicationContext(),"Tampil Halaman Profile", Toast.LENGTH_SHORT).show();
             }
         });

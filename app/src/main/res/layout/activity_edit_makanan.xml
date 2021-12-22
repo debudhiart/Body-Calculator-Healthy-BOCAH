@@ -111,7 +111,7 @@
                             android:id="@+id/tv_id_edit_kalori"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Kalori"
+                            android:text="Kalori (gram)"
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />
@@ -132,7 +132,7 @@
                             android:id="@+id/tv_id_edit_protein"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Protein"
+                            android:text="Protein (gram)"
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />
@@ -153,7 +153,7 @@
                             android:id="@+id/tv_id_edit_lemak"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Lemak"
+                            android:text="Lemak (gram)"
                             android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/Abu_abu_gelap"
                             android:textSize="35px"  />

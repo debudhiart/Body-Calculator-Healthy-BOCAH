@@ -155,7 +155,7 @@ public class EditUserActivity extends AppCompatActivity {
                         values.put(DBHelper.umur, integerUmur);
                         values.put(DBHelper.jenis_kelamin, rbEditGander.getText().toString());
                         dbHelper.updateData_tb_user(values, idUser);
-                        Toast.makeText(EditUserActivity.this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(EditUserActivity.this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
                         Intent suksesDaftar = new Intent(EditUserActivity.this, ProfileActivity.class);
 //                        suksesDaftar.putExtra(KIRIM_NAMA_DEPAN, textNamaDepan);
 

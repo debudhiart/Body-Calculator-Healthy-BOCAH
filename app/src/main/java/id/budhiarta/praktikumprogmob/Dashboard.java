@@ -28,6 +28,11 @@ import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 import id.budhiarta.praktikumprogmob.model.Model_tb_program;
 import id.budhiarta.praktikumprogmob.model.Model_tb_shift_makan;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dashboard extends AppCompatActivity {
     private RecyclerView.LayoutManager sarapanLayoutManager,mknSiangLayoutManager,mknMalamLayoutManager;
@@ -42,6 +47,10 @@ public class Dashboard extends AppCompatActivity {
     private int total_kalori,target_kalori;
 
     int userID;
+    ArrayList<Model_tb_makanan> daftarMakananAdapter = new ArrayList<>();
+
+    private MakananAPI makananAPI;
+    private Call<ArrayList<Model_tb_makanan>> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,37 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         userID = this.getSharedPreferences("pref_name", 0).getInt("key_id", 0);
+
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.3:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        makananAPI = retrofit.create(MakananAPI.class);
+        call = makananAPI.getFood();
+
+        db = new DBHelper(this);
+        daftarMakananAdapter = db.getAllData_tb_makanan();
+
+        ArrayList <Model_tb_makanan> makananArrayList = db.getAllData_tb_makanan();
+        if (makananArrayList.isEmpty()){
+            call.enqueue(new Callback<ArrayList<Model_tb_makanan>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Model_tb_makanan>> call, Response<ArrayList<Model_tb_makanan>> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(getApplicationContext(), "Code : " + Integer.toString(response.code()), Toast.LENGTH_LONG).show();
+                        return;
+                    }else {
+                        daftarMakananAdapter = response.body();
+                        db.insertAllData(daftarMakananAdapter);
+                        Toast.makeText(getApplicationContext(), "Selamat datang kembali di aplikasi BOCAH ", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Model_tb_makanan>> call, Throwable t) {
+                    Log.d("api",t.getMessage());
+                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+//                daftarMakananAdapter=db.getAllData_tb_makanan();
+                }
+            });
+        }
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);

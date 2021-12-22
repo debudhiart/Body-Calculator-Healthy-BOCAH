@@ -125,7 +125,7 @@ public class EditMakanan extends AppCompatActivity {
                 }
 
                 AlertDialog dialog = new AlertDialog.Builder(EditMakanan.this).setTitle("Konfirmasi Data Makanan")
-                        .setMessage("Nama Makanan:"+ stringNamaMakanan +"Satuan:"+ stringSatuan + "\n Kalori:"+ integerKalori + "\n Protein:"+ integerProtein + "\n Lemak:"+ integerLemak)
+                        .setMessage("Nama Makanan:"+ stringNamaMakanan +"\nSatuan:"+ stringSatuan + "\n Kalori:"+ integerKalori + "\n Protein:"+ integerProtein + "\n Lemak:"+ integerLemak)
                         .setPositiveButton("Lanjutkan", null)
                         .setNegativeButton("Kembali", null)
                         .show();
@@ -168,7 +168,7 @@ public class EditMakanan extends AppCompatActivity {
     }
 
     private void editAPIMakanan(int idMakanan, String stringNamaMakanan, String stringSatuan, String integerKalori, String integerProtein, String integerLemak) {
-        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.2:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.3:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
         makananAPI = retrofit.create(MakananAPI.class);
         makananAPI.updatMakananAPI(idMakanan, stringNamaMakanan, stringSatuan, Integer.parseInt(integerKalori), Integer.parseInt(integerProtein), Integer.parseInt(integerLemak)).enqueue(new Callback<Model_tb_makanan>() {
             @Override

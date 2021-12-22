@@ -13,11 +13,13 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -48,8 +50,6 @@ public class TambahMakanan extends AppCompatActivity {
     private MakananAPI makananAPI;
     private  Call<ArrayList<Model_tb_makanan>> call;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +60,7 @@ public class TambahMakanan extends AppCompatActivity {
         actionBar.setTitle("Tambah Makanan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.2:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit= new Retrofit.Builder().baseUrl("http://192.168.1.3:8000/api/").addConverterFactory(GsonConverterFactory.create()).build();
         makananAPI = retrofit.create(MakananAPI.class);
         call = makananAPI.getFood();
 
@@ -95,7 +95,7 @@ public class TambahMakanan extends AppCompatActivity {
         db = new DBHelper(this);
         daftarMakananAdapter = db.getAllData_tb_makanan();
         idShift=getIntent().getIntExtra("shift_makan_id",0);
-        Toast.makeText(this, "ID SHift : "+Integer.toString(idShift), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "ID SHift : "+Integer.toString(idShift), Toast.LENGTH_SHORT).show();
         mulaiAdapter();
 
         FloatingActionButton fabTambahDataMakanan = findViewById(R.id.fab_tambah_data_makanan);
@@ -133,8 +133,6 @@ public class TambahMakanan extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
 
-
-
         ArrayList <Model_tb_makanan> makananArrayList = db.getAllData_tb_makanan();
         if (makananArrayList.isEmpty()){
             call.enqueue(new Callback<ArrayList<Model_tb_makanan>>() {
@@ -147,6 +145,7 @@ public class TambahMakanan extends AppCompatActivity {
                         daftarMakananAdapter = response.body();
                         db.insertAllData(daftarMakananAdapter);
                         Toast.makeText(getApplicationContext(), "Code : " + daftarMakananAdapter.get(0).getNama_makanan(), Toast.LENGTH_LONG).show();
+
                     }
                 }
 
