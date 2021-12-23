@@ -193,6 +193,7 @@ public class TambahMakanan extends AppCompatActivity {
                             Model_tb_makanan item = adapterMakanan.getMakananList().get(position);
                             db.deleteData_tb_makanan(item.getMakanan_id());
                             adapterMakanan.deleteMakanan(position);
+                            dialog.dismiss();
                         }
                     });
 //            Toast.makeText(this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();

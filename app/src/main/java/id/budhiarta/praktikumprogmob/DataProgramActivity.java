@@ -81,7 +81,7 @@ public class DataProgramActivity extends AppCompatActivity{
 
         intWeight = Integer.parseInt(textHeight);
         intHeight = Integer.parseInt(textWeight);
-        Toast.makeText(this, "umur: " +intAge + "gender: " + textGender + "tinggi: " + intHeight + "beratbadan: " + intWeight, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "umur: " +intAge + "gender: " + textGender + "tinggi: " + intHeight + "beratbadan: " + intWeight, Toast.LENGTH_SHORT).show();
 
         if (textGender.equals("Laki-laki")){
             RadioButton rbLakiLaki = findViewById(R.id.rb_program_laki_laki);

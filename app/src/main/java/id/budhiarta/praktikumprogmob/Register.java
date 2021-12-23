@@ -150,7 +150,7 @@ public class Register extends AppCompatActivity {
                         values.put(DBHelper.term_and_condition, textPersyaratan);
                         values.put(DBHelper.umur, angkaUmur);
                         dbHelper.insertData_tb_user(values);
-                        Toast.makeText(Register.this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Register.this, "Data berhasil disimpan" + angkaUmur, Toast.LENGTH_SHORT).show();
                         Intent suksesDaftar = new Intent(Register.this, SuksesDaftar.class);
                         suksesDaftar.putExtra(KIRIM_NAMA_DEPAN, textNamaDepan);
 
