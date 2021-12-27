@@ -101,6 +101,25 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TB_SHIFT_MAKAN);
         db.execSQL("DROP TABLE IF EXISTS " + TB_DETAIL_SHIFT);
         db.execSQL("DROP TABLE IF EXISTS " + TB_PROGRAM);
+
+        String queryCreateTabelUser = "CREATE TABLE " + tb_user + "(" + user_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + nama_depan + " TEXT, "
+                + nama_belakang + " TEXT, " + email + " TEXT, " + jenis_kelamin + " TEXT, " + umur + " INTEGER, "
+                + password + " TEXT, " + term_and_condition + " INTEGER)";
+        String queryCreateTabelMakanan = "CREATE TABLE " + tb_makanan + "(" + makanan_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + nama_makanan
+                + " TEXT, " + satuan + " TEXT, " + kalori + " INTEGER, " + protein + " INTEGER, " + lemak + " INTEGER)";
+
+        String queryCreateTabelShiftMakan = "CREATE TABLE " + TB_SHIFT_MAKAN + "(" + SHIFT_MAKAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + JENIS_SHIFT
+                + " TEXT, " + TOTAL_KALORI + " INTEGER, "+  TANGGAL+" TEXT, "+user_id + " INTEGER, FOREIGN KEY ("+user_id+") REFERENCES "+tb_user+"("+user_id+") ON DELETE CASCADE ON UPDATE NO ACTION)";
+
+        String queryCreateTabelDetailShift = "CREATE TABLE " + TB_DETAIL_SHIFT + "(" + DETAIL_SHIFT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + makanan_id + " INTEGER, " + SHIFT_MAKAN_ID + " INTEGER, FOREIGN KEY ("+makanan_id+") REFERENCES "+tb_makanan+"("+makanan_id+") ON DELETE CASCADE ON UPDATE NO ACTION, FOREIGN KEY ("+SHIFT_MAKAN_ID+") REFERENCES "+TB_SHIFT_MAKAN+"("+SHIFT_MAKAN_ID+") ON DELETE CASCADE ON UPDATE NO ACTION)";
+
+        String queryCreateTableProgram="CREATE TABLE "+TB_PROGRAM+" ( "+ID_PROGRAM+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TANGGAL_DIBUAT+" TEXT, "+UMUR_AT_PROGRAM+" INTEGER, "+BERAT_BADAN+" INTEGER, "+TINGGI_BADAN+" INTEGER, "+TARGET_KALORI+" INTEGER, "+AKTIFITAS_TUBUH+" TEXT, "+JENIS_PROGRAM+" TEXT, "+user_id+" INTEGER, FOREIGN KEY("+user_id+") REFERENCES "+tb_user+"("+user_id+") ON DELETE CASCADE ON UPDATE NO ACTION)";
+
+        db.execSQL(queryCreateTabelUser);
+        db.execSQL(queryCreateTabelMakanan);
+        db.execSQL(queryCreateTabelShiftMakan);
+        db.execSQL(queryCreateTabelDetailShift);
+        db.execSQL(queryCreateTableProgram);
     }
 
     public Cursor getAllData_tb_user(){

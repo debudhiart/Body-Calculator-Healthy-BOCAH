@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,12 +28,15 @@ import id.budhiarta.praktikumprogmob.helper.DBHelper;
 import id.budhiarta.praktikumprogmob.model.Model_tb_makanan;
 import id.budhiarta.praktikumprogmob.model.Model_tb_program;
 import id.budhiarta.praktikumprogmob.model.Model_tb_shift_makan;
+import id.budhiarta.praktikumprogmob.model.Model_tb_user;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.ContentValues.TAG;
 
 public class Dashboard extends AppCompatActivity {
     private RecyclerView.LayoutManager sarapanLayoutManager,mknSiangLayoutManager,mknMalamLayoutManager;
@@ -105,6 +109,16 @@ public class Dashboard extends AppCompatActivity {
 
         db=new DBHelper(this);
         db.checkAndCreateShift(userID);
+
+//        try {
+//            programModel=db.getProgram(userID);
+//
+//        }catch (Exception e){
+//            Toast.makeText(getApplicationContext(), "Nama Depan atau Password salah", Toast.LENGTH_SHORT).show();
+//            Log.e(TAG, "Error:" + e.getMessage());
+//            return;
+//        }
+
         programModel=db.getProgram(userID);
         shiftSarapan=db.getShiftMakan(1,userID);
         shiftSiang=db.getShiftMakan(2,userID);
