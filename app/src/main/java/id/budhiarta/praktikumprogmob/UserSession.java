@@ -28,6 +28,6 @@ public class UserSession{
 
     public boolean isLogin(Context context){
         return context.getSharedPreferences("pref_name", 0).getBoolean("isLogin", false);
-//        return sharedPreferences.getBoolean("isLogin", false);
+
     }
 }
